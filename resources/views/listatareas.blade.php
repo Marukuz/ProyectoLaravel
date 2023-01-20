@@ -16,12 +16,10 @@
           <th scope="col">Anotacion Inicial</th>
           <th scope="col">Fecha de realizacion</th>
           <th scope="col"></th>
-
         </tr>
       </thead>
       <tbody>
           <!-- Generacion de la tabla -->
-          <td>1</td>
           <td>1</td>
           <td>1</td>
           <td>1</td>
