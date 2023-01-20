@@ -21,7 +21,18 @@
       </thead>
       <tbody>
           <!-- Generacion de la tabla -->
-      
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
       </tbody>
     </table>
   </div>

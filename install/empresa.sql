@@ -95,8 +95,7 @@ CREATE TABLE `tareas` (
   `fecha_realizacion` varchar(45) DEFAULT NULL,
   `descripcion` varchar(45) DEFAULT NULL,
   `anotacion_inicio` varchar(45) DEFAULT NULL,
-  `anotacion_final` varchar(45) DEFAULT NULL,
-  `Tareascol` varchar(45) DEFAULT NULL
+  `anotacion_final` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
