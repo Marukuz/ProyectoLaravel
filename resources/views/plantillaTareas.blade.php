@@ -17,7 +17,7 @@
                 <div class="navbar-nav">
                     <a class="nav-link text-light" href="index.php?controller=tareasController&action=Tareas::mostrarTareas">Ver Tareas</a>
                     <a class="nav-link text-light" href="index.php?controller=tareasController&action=Tareas::mostrarTareasPendientes">Ver Tareas Pendientes</a>
-                    <a class="nav-link text-light" href="index.php?controller=tareasController&action=Tareas::añadirTarea">Añadir tarea</a>
+                    <a class="nav-link text-light" href="/añadirTarea">Añadir tarea</a>
                 </div>
             </div>
             <a class="nav-link" href="index.php?controller=usuariosController&action=Usuarios::verUsuarios"><button class="btn btn-primary">Usuarios</button></a>&nbsp&nbsp

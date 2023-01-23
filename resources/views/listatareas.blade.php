@@ -19,18 +19,21 @@
         </tr>
       </thead>
       <tbody>
-          <!-- Generacion de la tabla -->
-          <td>1</td>
-          <td>1</td>
-          <td>1</td>
-          <td>1</td>
-          <td>1</td>
-          <td>1</td>
-          <td>1</td>
-          <td>1</td>
-          <td>1</td>
-          <td>1</td>
-          <td>1</td>
+        @foreach($tarea as $tareas)
+        <tr>
+          <td>{{$tareas['tarea_id']}}</td>
+          <td>{{$tareas['nombre']}}</td>
+          <td>{{$tareas['apellido']}}</td>
+          <td>{{$tareas['telefono']}}</td>
+          <td>{{$tareas['poblacion']}}</td>
+          <td>{{$tareas['provincia']}}</td>
+          <td>{{$tareas['estado_tarea']}}</td>
+          <td>{{$tareas['operario_encargado']}}</td>
+          <td>{{$tareas['descripcion']}}</td>
+          <td>{{$tareas['anotacion_inicial']}}</td>
+          <td>{{$tareas['fecha_realizacion']}}</td>
+        <tr>
+        @endforeach
       </tbody>
     </table>
   </div>

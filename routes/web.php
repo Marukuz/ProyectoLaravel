@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TareasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('listatareas');
+    return view('login');
+});
+Route::get('/tareas', [TareasController::class,'show']);
+Route::get('/añadirTarea', function () {
+    return view('añadirTarea');
 });
