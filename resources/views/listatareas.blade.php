@@ -19,19 +19,19 @@
         </tr>
       </thead>
       <tbody>
-        @foreach($tarea as $tareas)
+        @foreach($tareas as $tarea)
         <tr>
-          <td>{{$tareas['tarea_id']}}</td>
-          <td>{{$tareas['nombre']}}</td>
-          <td>{{$tareas['apellido']}}</td>
-          <td>{{$tareas['telefono']}}</td>
-          <td>{{$tareas['poblacion']}}</td>
-          <td>{{$tareas['provincia']}}</td>
-          <td>{{$tareas['estado_tarea']}}</td>
-          <td>{{$tareas['operario_encargado']}}</td>
-          <td>{{$tareas['descripcion']}}</td>
-          <td>{{$tareas['anotacion_inicial']}}</td>
-          <td>{{$tareas['fecha_realizacion']}}</td>
+          <td>{{$tarea['tarea_id']}}</td>
+          <td>{{$tarea['nombre']}}</td>
+          <td>{{$tarea['apellido']}}</td>
+          <td>{{$tarea['telefono']}}</td>
+          <td>{{$tarea['poblacion']}}</td>
+          <td>{{$tarea['provincia']}}</td>
+          <td>{{$tarea['estado_tarea']}}</td>
+          <td>{{$tarea['operario_encargado']}}</td>
+          <td>{{$tarea['descripcion']}}</td>
+          <td>{{$tarea['anotacion_inicial']}}</td>
+          <td>{{$tarea['fecha_realizacion']}}</td>
         <tr>
         @endforeach
       </tbody>

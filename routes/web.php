@@ -17,7 +17,7 @@ use App\Http\Controllers\TareasController;
 Route::get('/', function () {
     return view('login');
 });
-Route::get('/tareas', [TareasController::class,'show']);
+Route::get('/tareas', [TareasController::class,'index']);
 Route::get('/añadirTarea', function () {
     return view('añadirTarea');
 });

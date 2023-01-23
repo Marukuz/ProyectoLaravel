@@ -15,6 +15,8 @@ class TareasController extends Controller
     public function index()
     {
         //
+        $tareas = Tareas::all();
+        return view('listatareas',['tareas'=>$tareas]);
     }
 
     /**
@@ -48,11 +50,10 @@ class TareasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
         //
-        $tareas = Tareas::all();
-        return view('listatareas',['tarea'=>$tareas]);
+
     }
 
     /**
