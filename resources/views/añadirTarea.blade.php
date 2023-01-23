@@ -17,7 +17,7 @@
             <span class="text-danger">{{$message}}</span>
             @enderror   
             <br> 
-            <br><input type="text" class="form-control" name="nombre" value="{{$tareas[1] ?? ''}}" ><br>
+            <input type="text" class="form-control" name="nombre" value="{{$tareas[1] ?? ''}}" ><br>
 
             <!-- Filtrado de errores -->
             Apellido:

@@ -15,7 +15,7 @@
             <a class="navbar-brand text-light" href="#">Inicio</a>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link text-light" href="index.php?controller=tareasController&action=Tareas::mostrarTareas">Ver Tareas</a>
+                    <a class="nav-link text-light" href="/tareas">Ver Tareas</a>
                     <a class="nav-link text-light" href="index.php?controller=tareasController&action=Tareas::mostrarTareasPendientes">Ver Tareas Pendientes</a>
                     <a class="nav-link text-light" href="/añadirTarea">Añadir tarea</a>
                 </div>
