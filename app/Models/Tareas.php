@@ -13,7 +13,7 @@ class tareas extends Model
     public function clientes(){
         return $this->belongsTo(clientes::class);
     }
-    public function empleado(){
+    public function empleados(){
         return $this->belongsTo(empleados::class);
     }
 }
