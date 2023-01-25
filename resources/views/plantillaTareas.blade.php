@@ -21,7 +21,7 @@
                 </div>
             </div>
             <a class="nav-link" href="index.php?controller=usuariosController&action=Usuarios::verUsuarios"><button class="btn btn-primary">Usuarios</button></a>&nbsp&nbsp
-            <a class="nav-link" href="index.php?controller=usuariosController&action=Usuarios::loguearse"><button class="btn btn-danger">Log Out</button></a>
+            <a class="nav-link" href="/"><button class="btn btn-danger">Log Out</button></a>
         </div>
     </nav>
 </header>
