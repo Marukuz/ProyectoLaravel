@@ -3,21 +3,21 @@
     <br>
     <h1 style="text-align: center;">Añadir tarea</h1><br>
     <div id="formulario" >
-        <form method="post">
+        <form class="col-2">
             <!-- Filtrado de errores -->    
             DNI:
             @error('dni')
             <span class="text-danger">{{$message}}</span>
             @enderror   
             <br>
-            <input type="text" class="form-control" name="dni" value="{{$tareas[0] ?? ''}}"><br>
+            <input type="text" class="form-control" name="dni" value=""><br>
             <!-- Filtrado de errores -->
             Nombre:
             @error('nombre')
             <span class="text-danger">{{$message}}</span>
             @enderror   
             <br> 
-            <input type="text" class="form-control" name="nombre" value="{{$tareas[1] ?? ''}}" ><br>
+            <input type="text" class="form-control" name="nombre" value="" ><br>
 
             <!-- Filtrado de errores -->
             Apellido:
@@ -25,7 +25,7 @@
             <span class="text-danger">{{$message}}</span>
             @enderror   
             <br> 
-            <input type="text" class="form-control" name="apellido" value="{{$tareas[2] ?? ''}}"><br>
+            <input type="text" class="form-control" name="apellido" value=""><br>
 
             <!-- Filtrado de errores -->
             Correo:
@@ -33,7 +33,7 @@
             <span class="text-danger">{{$message}}</span>
             @enderror   
             <br> 
-            <input type="text" class="form-control" name="correo" value="{{$tareas[3] ?? ''}}"><br>
+            <input type="text" class="form-control" name="correo" value=""><br>
 
             <!-- Filtrado de errores -->
             Telefono:
@@ -41,7 +41,7 @@
             <span class="text-danger">{{$message}}</span>
             @enderror   
             <br> 
-            <input type="text" class="form-control" name="telefono" value="{{$tareas[4] ?? ''}}"><br>
+            <input type="text" class="form-control" name="telefono" value=""><br>
 
             <!-- Filtrado de errores -->
             Direccion:
@@ -49,7 +49,7 @@
             <span class="text-danger">{{$message}}</span>
             @enderror   
             <br> 
-            <input type="text" class="form-control" name="direccion" value="{{$tareas[5] ?? ''}}"><br>
+            <input type="text" class="form-control" name="direccion" value=""><br>
             
             <!-- Filtrado de errores -->
             Poblacion:
@@ -57,7 +57,7 @@
             <span class="text-danger">{{$message}}</span>
             @enderror   
             <br> 
-            <input type="text" class="form-control" name="poblacion" value="{{$tareas[6] ?? ''}}" ><br>
+            <input type="text" class="form-control" name="poblacion" value="" ><br>
 
             <!-- Filtrado de errores -->
             Codigo Postal:
@@ -65,7 +65,7 @@
             <span class="text-danger">{{$message}}</span>
             @enderror   
             <br> 
-            <input type="text" class="form-control" name="codigop" value="{{$tareas[7] ?? ''}}"><br>
+            <input type="text" class="form-control" name="codigop" value=""><br>
 
             <!-- Filtrado de errores -->
             Provincia:
@@ -75,6 +75,9 @@
             <br> 
             <select class="form-select" name="provincia">
                 <option disabled selected>Selecciona</option>
+                @foreach($provincias as $provincia)
+                <option>{{$provincia->nombre}}</option>
+                @endforeach
             </select><br>
      
             <!-- Filtrado de errores -->
@@ -98,7 +101,7 @@
             <span class="text-danger">{{$message}}</span>
             @enderror   
             <br> 
-            <input type="date" class="form-control" name="fecha" value="{{$tareas[10] ?? ''}}"><br>
+            <input type="date" class="form-control" name="fecha" value=""><br>
 
             <!-- Filtrado de errores -->
             Descripcion:
@@ -106,7 +109,7 @@
             <span class="text-danger">{{$message}}</span>
             @enderror   
             <br> 
-            <textarea class="form-control" name="descripcion" value="{{$tareas[11] ?? ''}}"></textarea><br>
+            <textarea class="form-control" name="descripcion" value=""></textarea><br>
             
             <!-- Filtrado de errores -->
             Anotacion:
@@ -114,7 +117,7 @@
             <span class="text-danger">{{$message}}</span>
             @enderror   
             <br> 
-            <textarea class="form-control" name="anotacioni" value="{{$tareas[12] ?? ''}}"></textarea><br>
+            <textarea class="form-control" name="anotacioni" value=""></textarea><br>
             
             <div style="text-align: center;">
                 <button type="submit" class="btn btn-primary">Añadir</button>

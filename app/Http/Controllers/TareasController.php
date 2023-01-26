@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Tareas;
+use App\Models\tareas;
+use App\Models\provincias;
 
 class TareasController extends Controller
 {
@@ -15,7 +16,7 @@ class TareasController extends Controller
     public function index()
     {
         //
-        $tareas = Tareas::all();
+        $tareas = tareas::all();
         return view('listatareas',['tareas'=>$tareas]);
     }
 
@@ -27,7 +28,8 @@ class TareasController extends Controller
     public function create()
     {
         //
-
+        $provincias = provincias::all();
+        return view('añadirTarea',compact("provincias"));
     }
 
     /**
@@ -39,9 +41,11 @@ class TareasController extends Controller
     public function store(Request $request)
     {
         //
+
         $validacion = $request->validate([
             'name'=>'required',
         ]);
+        
     }
 
     /**

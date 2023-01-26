@@ -18,6 +18,5 @@ Route::get('/', function () {
     return view('login');
 });
 Route::get('/tareas', [TareasController::class,'index']);
-Route::get('/añadirTarea', function () {
-    return view('añadirTarea');
-});
+
+Route::get('/añadirTarea', [TareasController::class,'create']);
