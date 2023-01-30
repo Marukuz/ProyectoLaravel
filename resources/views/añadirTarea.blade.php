@@ -3,7 +3,7 @@
     <br>
     <h1 style="text-align: center;">Añadir tarea</h1><br>
     <div id="formulario" >
-        <form class="col-2">
+        <form action="{{ route('tareas.store') }}" class="col-2" method="POST">
             <!-- Filtrado de errores -->    
             DNI:
             @error('dni')
@@ -113,14 +113,14 @@
             
             <!-- Filtrado de errores -->
             Anotacion:
-            @error('anotacioni')
+            @error('anotacion')
             <span class="text-danger">{{$message}}</span>
             @enderror   
             <br> 
-            <textarea class="form-control" name="anotacioni" value=""></textarea><br>
+            <textarea class="form-control" name="anotacion" value=""></textarea><br>
             
             <div style="text-align: center;">
-                <button type="submit" class="btn btn-primary">Añadir</button>
+                <button type="submit" class="btn btn-primary col-3">Añadir</button>
             </div><br><br>
         </form>
     </div>

@@ -43,7 +43,19 @@ class TareasController extends Controller
         //
 
         $validacion = $request->validate([
-            'name'=>'required',
+            'dni'=>'required',
+            'nombre'=>'required',
+            'apellido'=>'required',
+            'correo'=>'required',
+            'telefono'=>'required',
+            'direccion'=>'required',
+            'poblacion'=>'required',
+            'codigop'=>'required',
+            'provincia'=>'required',
+            'operario'=>'required',
+            'fecha'=>'required',
+            'descripcion'=>'required',
+            'anotacion'=>'required',
         ]);
         
     }

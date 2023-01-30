@@ -20,3 +20,5 @@ Route::get('/', function () {
 Route::get('/tareas', [TareasController::class,'index']);
 
 Route::get('/añadirTarea', [TareasController::class,'create']);
+
+Route::resource('tareas', TareasController::class);
