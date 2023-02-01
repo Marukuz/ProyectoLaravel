@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\tareas;
 use App\Models\provincias;
+use App\Models\clientes;
+use App\Models\empleados;
+
 
 class TareasController extends Controller
 {
@@ -28,8 +31,10 @@ class TareasController extends Controller
     public function create()
     {
         //
+        $operarios = empleados::all()->where('tipo','=','operario');
+        $clientes = clientes::all();
         $provincias = provincias::all();
-        return view('añadirTarea',compact("provincias"));
+        return view('añadirTarea',compact("provincias","clientes","operarios"));
     }
 
     /**
@@ -43,19 +48,20 @@ class TareasController extends Controller
         //
 
         $validacion = $request->validate([
-            'dni'=>'required',
-            'nombre'=>'required',
-            'apellido'=>'required',
-            'correo'=>'required',
-            'telefono'=>'required',
+            'dni'=>['required','regex:/((^[A-Z]{1}[0-9]{7}[A-Z0-9]{1}$|^[T]{1}[A-Z0-9]{8}$)|^[0-9]{8}[A-Z]{1}$)/'],
+            'nombre'=>'required|regex:/^[a-z]+$/i',
+            'apellido'=>'required|regex:/^[a-z]+$/i',
+            'correo'=>'required|email',
+            'telefono'=>['required','regex:/(\+34|0034|34)?[ -]*(6|7|8|9)[ -]*([0-9][ -]*){8}/'],
             'direccion'=>'required',
             'poblacion'=>'required',
-            'codigop'=>'required',
+            'codigop'=>'required|regex:/^([0-9]{5})$/',
             'provincia'=>'required',
             'operario'=>'required',
-            'fecha'=>'required',
-            'descripcion'=>'required',
-            'anotacion'=>'required',
+            'fecha'=>'nullable',
+            'descripcion'=>'nullable',
+            'anotacion'=>'nullable',
+            'cliente'=>'required',
         ]);
         
     }
