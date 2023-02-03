@@ -47,7 +47,7 @@ class TareasController extends Controller
     {
         //
 
-        $validacion = $request->validate([
+        $datos = $request->validate([
             'dni'=>['required','regex:/((^[A-Z]{1}[0-9]{7}[A-Z0-9]{1}$|^[T]{1}[A-Z0-9]{8}$)|^[0-9]{8}[A-Z]{1}$)/'],
             'nombre'=>'required|regex:/^[a-z]+$/i',
             'apellido'=>'required|regex:/^[a-z]+$/i',
@@ -55,14 +55,20 @@ class TareasController extends Controller
             'telefono'=>['required','regex:/(\+34|0034|34)?[ -]*(6|7|8|9)[ -]*([0-9][ -]*){8}/'],
             'direccion'=>'required',
             'poblacion'=>'required',
-            'codigop'=>'required|regex:/^([0-9]{5})$/',
+            'codigo_postal'=>'required|regex:/^([0-9]{5})$/',
             'provincia'=>'required',
-            'operario'=>'required',
-            'fecha'=>'nullable',
+            'operario_encargado'=>'required',
+            'fecha_realizacion'=>'nullable',
             'descripcion'=>'nullable',
-            'anotacion'=>'nullable',
-            'cliente'=>'required',
+            'anotacion_inicio'=>'nullable',
+            'clientes_id'=>'required',
         ]);
+        $cliente = clientes::all()->where('nombre','=',$datos['cliente']);
+        $clienteid= $cliente->id;
+
+        $datos['clientes_id']=$clienteid;
+
+        Tareas::insert($datos);
         
     }
 

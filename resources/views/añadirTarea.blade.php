@@ -19,11 +19,11 @@
             <div class="col-4">
                 <!-- Filtrado de errores -->
                 Cliente:
-                @error('cliente')
+                @error('clientes_id')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
-                <select class="form-select" name="cliente">
-                    <option selected>{{ old('cliente') }}</option>
+                <select class="form-select" name="cliente_id">
+                    <option selected>{{ old('clientes_id') }}</option>
                     @foreach($clientes as $cliente)
                     <option>{{$cliente->nombre}}</option>
                     @endforeach
@@ -99,11 +99,11 @@
 
                 <!-- Filtrado de errores -->
                 Codigo Postal:
-                @error('codigop')
+                @error('codigo_postal')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
                 <br>
-                <input type="text" class="form-control" name="codigop" value="{{ old('codigop') }}"><br>
+                <input type="text" class="form-control" name="codigo_postal" value="{{ old('codigo_postal') }}"><br>
 
             </div>
             <div class="div col-3">
@@ -123,12 +123,12 @@
             <div class="div col-3">
                 <!-- Filtrado de errores -->
                 Operario:
-                @error('operario')
+                @error('operario_encargado')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
                 <br>
-                <select class="form-select" name="operario">
-                    <option selected>{{ old('operario') }}</option>
+                <select class="form-select" name="operario_encargado">
+                    <option selected>{{ old('operario_encargado') }}</option>
                     @foreach($operarios as $operario)
                     <option>{{$operario->nombre}}</option>
                     @endforeach
@@ -137,11 +137,11 @@
             <div class="div col-3">
                 <!-- Filtrado de errores -->
                 Fecha:
-                @error('fecha')
+                @error('fecha_realizacion')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
                 <br>
-                <input type="date" class="form-control" name="fecha" value="{{ old('fecha') }}"><br>
+                <input type="date" class="form-control" name="fecha_realizacion" value="{{ old('fecha_realizacion') }}"><br>
 
             </div>
         </div>
@@ -162,11 +162,11 @@
 
                 <!-- Filtrado de errores -->
                 Anotacion:
-                @error('anotacion')
+                @error('anotacion_inicio')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
                 <br>
-                <textarea class="form-control" name="anotacion">{{ old('anotacion') }}</textarea><br>
+                <textarea class="form-control" name="anotacion_inicio">{{ old('anotacion_inicio') }}</textarea><br>
 
             </div>
         </div>
