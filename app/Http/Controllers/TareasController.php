@@ -57,17 +57,18 @@ class TareasController extends Controller
             'poblacion'=>'required',
             'codigo_postal'=>'required|regex:/^([0-9]{5})$/',
             'provincia'=>'required',
-            'operario_encargado'=>'required',
+            'empleados_id'=>'required',
             'fecha_realizacion'=>'nullable',
             'descripcion'=>'nullable',
             'anotacion_inicio'=>'nullable',
             'clientes_id'=>'required',
+        
         ]);
         $cliente = clientes::all()->where('nombre','=',$datos['cliente']);
         $clienteid= $cliente->id;
 
         $datos['clientes_id']=$clienteid;
-
+        
         Tareas::insert($datos);
         
     }
