@@ -23,7 +23,7 @@
                 <select class="form-select" name="clientes_id">
                     <option selected>{{ old('clientes_id') }}</option>
                     @foreach($clientes as $cliente)
-                    <option>{{$cliente->nombre}}</option>
+                    <option value="{{$cliente->id}}">{{$cliente->nombre}}</option>
                     @endforeach
                 </select>
                 @error('clientes_id')
@@ -128,7 +128,7 @@
                 <select class="form-select" name="empleados_id">
                     <option selected>{{ old('empleados_id') }}</option>
                     @foreach($operarios as $operario)
-                    <option>{{$operario->nombre}}</option>
+                    <option value="{{$operario->id}}">{{$operario->nombre}}</option>
                     @endforeach
                 </select>
                 @error('empleados_id')

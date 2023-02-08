@@ -65,12 +65,12 @@ class TareasController extends Controller
         
         ]);
 
-        $clienteid = clientes::select('id')->where('nombre', $datos['clientes_id'])->get();
+        $clienteid = clientes::find($datos['clientes_id'])->id;
 
-        $operarioid = empleados::select('id')->where('nombre', $datos['empleados_id'])->get();
+        $operarioid = empleados::find($datos['empleados_id'])->id;
         
-        $datos['clientes_id']=$clienteid;
-        $datos['empleados_id']=$operarioid;
+        $datos['clientes_id'] = $clienteid;
+        $datos['empleados_id'] = $operarioid;
         
         Tareas::insert($datos);
         
