@@ -16,4 +16,6 @@ class tareas extends Model
     public function empleados(){
         return $this->belongsTo(empleados::class);
     }
+
+    public $timestamps = false;
 }
