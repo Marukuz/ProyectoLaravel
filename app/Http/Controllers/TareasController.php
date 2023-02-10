@@ -65,10 +65,12 @@ class TareasController extends Controller
         
         ]);
 
+        
         $clienteid = clientes::find($datos['clientes_id'])->id;
 
         $operarioid = empleados::find($datos['empleados_id'])->id;
         
+        $datos['estado_tarea'] = 'B';
         $datos['clientes_id'] = $clienteid;
         $datos['empleados_id'] = $operarioid;
         
@@ -86,6 +88,12 @@ class TareasController extends Controller
     {
         //
 
+    }
+
+    public function showPending(){
+        //
+        $tareas = tareas::all()->where('estado_tarea','=','P');
+        return view('listatareaspendientes',['tareas'=>$tareas]);
     }
 
     /**

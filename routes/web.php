@@ -21,4 +21,6 @@ Route::get('/tareas', [TareasController::class,'index']);
 
 Route::get('/añadirTarea', [TareasController::class,'create']);
 
+Route::get('/tareaspendientes',[TareasController::class,'showPending']);
+
 Route::resource('tareas', TareasController::class);

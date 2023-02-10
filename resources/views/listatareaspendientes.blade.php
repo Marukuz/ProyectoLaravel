@@ -27,7 +27,7 @@
           <td>{{$tarea->estado_tarea}}</td>
           <td>{{$tarea->empleados->nombre}}</td>
           <td>{{$tarea->descripcion}}</td>
-          <td>{{$tarea->anotacion_inicio}}</td>
+          <td>{{$tarea->anotacion_inicial}}</td>
           <td>{{$tarea->fecha_realizacion}}</td>
         <tr>
         @endforeach
