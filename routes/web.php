@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TareasController;
 
@@ -14,9 +15,19 @@ use App\Http\Controllers\TareasController;
 |
 */
 
+
 Route::get('/', function () {
-    return view('login');
-});
+    return view('plantillaTareas');
+})->middleware(['auth', 'verified'])->name('plantillaTareas');
+
+/*Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});*/
+
+require __DIR__.'/auth.php';
+
 Route::get('/tareas', [TareasController::class,'index']);
 
 Route::get('/añadirTarea', [TareasController::class,'create']);
