@@ -148,7 +148,7 @@
         <br>
         <!-- QUINTA FILA  -->
         <div class="row">
-            <div class="col-6">
+            <div class="col-4">
                 <!-- Filtrado de errores -->
                 Descripcion:
                 <br>
@@ -157,12 +157,21 @@
                 <span class="text-danger">{{$message}}</span>
                 @enderror
             </div>
-            <div class="col-6">
+            <div class="col-4">
                 <!-- Filtrado de errores -->
-                Anotacion:                
+                Anotacion Inicial:                
                 <br>
                 <textarea class="form-control" name="anotacion_inicio">{{ old('anotacion_inicio') }}</textarea>
                 @error('anotacion_inicio')
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+            </div>
+            <div class="col-4">
+                <!-- Filtrado de errores -->
+                Anotacion Final:                
+                <br>
+                <textarea class="form-control" name="anotacion_final">{{ old('anotacion_final') }}</textarea>
+                @error('anotacion_final')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
             </div>

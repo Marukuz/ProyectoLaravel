@@ -16,22 +16,19 @@ use App\Http\Controllers\TareasController;
 */
 
 
+
 Route::get('/', function () {
-    return view('plantillaTareas');
-})->middleware(['auth', 'verified'])->name('plantillaTareas');
+    return view('plantillatareas');
+})->middleware(['auth', 'verified'])->name('plantillatareas');
 
-/*Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});*/
 
+  
 require __DIR__.'/auth.php';
 
-Route::get('/tareas', [TareasController::class,'index']);
+Route::controller(TareasController::class)->group(function(){
+    Route::get('/tareaspendientes',[TareasController::class,'showPending'])->middleware('auth')->name('tareaspendientes');
+});
 
-Route::get('/añadirTarea', [TareasController::class,'create']);
-
-Route::get('/tareaspendientes',[TareasController::class,'showPending']);
-
-Route::resource('tareas', TareasController::class);
+Route::group(['middleware' => 'auth'], function() {
+    Route::resource('tareas', TareasController::class); 
+});

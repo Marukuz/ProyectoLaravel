@@ -14,6 +14,7 @@
           <th scope="col">Descripcion</th>
           <th scope="col">Anotacion Inicial</th>
           <th scope="col">Fecha de realizacion</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -29,9 +30,17 @@
           <td>{{$tarea->descripcion}}</td>
           <td>{{$tarea->anotacion_inicio}}</td>
           <td>{{$tarea->fecha_realizacion}}</td>
+          <td>
+          <a href="/"><button class="btn btn-success">Ver</button></a>
+          <a href="{{ route('tareas.edit',$tarea) }}"><button class="btn btn-warning">Modificar</button></a>
+          <a href="/"><button class="btn btn-danger">Eliminar</button></a>
+          </td>
         <tr>
         @endforeach
       </tbody>
     </table>
+    <div class="pagination">
+      {{ $tareas->links() }}
+    </div>
   </div>
 @endsection

@@ -17,11 +17,18 @@
                 <div class="navbar-nav">
                     <a class="nav-link text-light" href="/tareas">Ver Tareas</a>
                     <a class="nav-link text-light" href="/tareaspendientes">Ver Tareas Pendientes</a>
-                    <a class="nav-link text-light" href="/añadirTarea">Añadir tarea</a>
+                    <a class="nav-link text-light" href="/tareas/create">Añadir tarea</a>
                 </div>
             </div>
             <a class="nav-link" href="index.php?controller=usuariosController&action=Usuarios::verUsuarios"><button class="btn btn-primary">Usuarios</button></a>&nbsp&nbsp
-            <a class="nav-link" href="/"><button class="btn btn-danger">Log Out</button></a>
+            <form method="POST" action="{{ route('logout') }}">
+                    @csrf   
+                    <button class="btn btn-danger "><x-responsive-nav-link class="text-decoration-nonetext-decoration-none text-white" :href="route('logout')"
+                            onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                        {{ __('Log Out') }}
+                    </x-responsive-nav-link></button>
+                </form>
         </div>
     </nav>
 </header>

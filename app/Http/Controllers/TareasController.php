@@ -19,8 +19,9 @@ class TareasController extends Controller
     public function index()
     {
         //
-        $tareas = tareas::all();
-        return view('listatareas',['tareas'=>$tareas]);
+
+        $tareas = tareas::paginate(10);
+        return view('tareas/listatareas',['tareas'=>$tareas]);
     }
 
     /**
@@ -34,7 +35,7 @@ class TareasController extends Controller
         $operarios = empleados::all()->where('tipo','=','operario');
         $clientes = clientes::all();
         $provincias = provincias::all();
-        return view('añadirTarea',compact("provincias","clientes","operarios"));
+        return view('tareas/añadirtarea',compact("provincias","clientes","operarios"));
     }
 
     /**
@@ -59,8 +60,9 @@ class TareasController extends Controller
             'provincia'=>'required',
             'empleados_id'=>'required',
             'fecha_realizacion'=>'nullable',
-            'descripcion'=>'nullable',
+            'descripcion'=>'required',
             'anotacion_inicio'=>'nullable',
+            'anotacion_final'=>'nullable',
             'clientes_id'=>'required',
         
         ]);
@@ -75,6 +77,7 @@ class TareasController extends Controller
         $datos['empleados_id'] = $operarioid;
         
         Tareas::insert($datos);
+        return redirect()->route('tareas.index');
         
     }
 
@@ -92,8 +95,8 @@ class TareasController extends Controller
 
     public function showPending(){
         //
-        $tareas = tareas::all()->where('estado_tarea','=','P');
-        return view('listatareaspendientes',['tareas'=>$tareas]);
+        $tareas = tareas::where('estado_tarea','=','P')->get();
+        return view('tareas/listatareaspendientes',['tareas'=>$tareas]);
     }
 
     /**
@@ -105,6 +108,13 @@ class TareasController extends Controller
     public function edit($id)
     {
         //
+        $tarea = tareas::find($id);
+        $operarios = empleados::where('tipo','=','operario')->get();
+        $clientes = clientes::where('nombre','!=',$tarea->clientes->nombre)->get();
+        $provincias = provincias::all();
+
+        return view('tareas/modificartarea',compact("tarea","clientes","operarios","provincias"));
+
     }
 
     /**
@@ -117,6 +127,25 @@ class TareasController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $datos = $request->validate([
+            'dni'=>['required','regex:/((^[A-Z]{1}[0-9]{7}[A-Z0-9]{1}$|^[T]{1}[A-Z0-9]{8}$)|^[0-9]{8}[A-Z]{1}$)/'],
+            'nombre'=>'required|regex:/^[a-z]+$/i',
+            'apellido'=>'required|regex:/^[a-z]+$/i',
+            'correo'=>'required|email',
+            'telefono'=>['required','regex:/(\+34|0034|34)?[ -]*(6|7|8|9)[ -]*([0-9][ -]*){8}/'],
+            'direccion'=>'required',
+            'poblacion'=>'required',
+            'codigo_postal'=>'required|regex:/^([0-9]{5})$/',
+            'provincia'=>'required',
+            'empleados_id'=>'required',
+            'estado_tarea'=>'required',
+            'fecha_realizacion'=>'nullable',
+            'descripcion'=>'required',
+            'anotacion_inicio'=>'nullable',
+            'anotacion_final'=>'nullable',
+            'clientes_id'=>'required',
+        ]);
+
     }
 
     /**
