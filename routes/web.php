@@ -27,11 +27,14 @@ Route::get('/', function () {
 require __DIR__.'/auth.php';
 
 Route::controller(TareasController::class)->group(function(){
-    Route::get('/tareaspendientes',[TareasController::class,'showPending'])->middleware('auth')->name('tareaspendientes');
+    Route::get('/tareaspendientes',[TareasController::class,'showPending'])->middleware(['auth','admin'])->name('tareaspendientes');
     Route::get('/tareacompleta/{id}',[TareasController::class,'tareaCompleta'])->middleware('auth')->name('tareacompleta');
     Route::get('/completartarea/{id}',[TareasController::class,'completarTareaView'])->middleware('auth')->name('completartareaview');
-    Route::put('/completar/{id}',[TareasController::class,'completarTarea'])->middleware('auth')->name('completartarea');
-    
+    Route::put('/completar/{id}',[TareasController::class,'completarTarea'])->middleware('auth')->name('completartarea'); 
+});
+
+Route::controller(UsuariosController::class)->group(function(){
+
 });
 
 Route::group(['middleware' => 'auth'], function() {

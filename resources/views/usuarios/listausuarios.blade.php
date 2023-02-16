@@ -11,7 +11,7 @@
           <th scope="col">Telefono</th>
           <th scope="col">Direccion</th>
           <th scope="col">Tipo</th>
-          
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -24,6 +24,11 @@
           <td>{{$usuario->telefono}}</td>
           <td>{{$usuario->direccion}}</td>
           <td>{{$usuario->tipo}}</td>
+          <td>
+            <a href=""><button class="btn btn-success">Ver</button></a>
+            <a href="{{ route('usuarios.edit',$usuario) }}"><button class="btn btn-warning">Modificar</button></a>
+            <a href="/"><button class="btn btn-danger">Eliminar</button></a>
+          </td>
         <tr>
         @endforeach
       </tbody>

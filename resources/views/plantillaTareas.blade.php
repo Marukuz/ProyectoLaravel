@@ -6,39 +6,68 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="{{asset('assets/css/tareas.css')}}">
     <title></title>
 </head>
 <header>
-    <nav class="navbar navbar-expand-lg bg-secondary">
-        <div class="container-fluid">
-            <a class="navbar-brand text-light" href="#">Inicio</a>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-link text-light" href="/tareas">Ver Tareas</a>
-                    <a class="nav-link text-light" href="/tareaspendientes">Ver Tareas Pendientes</a>
-                    <a class="nav-link text-light" href="/tareas/create">Añadir Tarea</a>
-                </div>
-                <div class="navbar-nav">
-                    <a class="nav-link text-light" href="/usuarios">Ver Empleado</a>
-                    <a class="nav-link text-light" href="/usuarios/create">Añadir Empleado</a>
-                </div>
-                @if(Auth::user()->tipo=="Administrador")
-                @endif
-            </div>
-            <span>
-                {{Auth::user()->name }} | {{ Auth::user()->tipo}}&nbsp;&nbsp;
-            </span>
-            <form method="POST" action="{{ route('logout') }}">
-                    @csrf   
-                    <button class="btn btn-danger "><x-responsive-nav-link class="text-decoration-nonetext-decoration-none text-white" :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        {{ __('Log Out') }}
-                    </x-responsive-nav-link></button>
-                </form>
+<nav class="navbar navbar-expand-lg bg-secondary">
+  <div class="container-fluid">
+    <a class="navbar-brand text-light" href="#">Inicio</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      @if(Auth::user()->tipo=="Administrador")
+      <div class="navbar-nav me-auto">
+        <div class="dropdown">
+        <a class="nav-link text-light dropdown-toggle" href="#" role="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            Tareas
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li> <a class="nav-link text-light" href="/tareas">Ver Tareas</a></li>
+            <li><a class="nav-link text-light" href="/tareas/create">Añadir Tarea</a></li>
+            <div class="dropdown-divider"></div>
+            <li> <a class="nav-link text-light" href="/tareaspendientes">Ver Tareas Pendientes</a></li>
+          </ul>
         </div>
-    </nav>
+        <div class="dropdown">
+          <a class="nav-link text-light dropdown-toggle" href="#" role="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            Empleados
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/usuarios">Ver Empleados</a></li>
+            <li><a class="dropdown-item" href="/usuarios/create">Añadir Empleado</a></li>
+          </ul>
+        </div>
+        <div class="dropdown">
+          <a class="nav-link text-light dropdown-toggle" href="#" role="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            Clientes
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/usuarios">Ver Clientes</a></li>
+            <li><a class="dropdown-item" href="/usuarios/create">Añadir Clientes</a></li>
+          </ul>
+        </div>
+      </div>
+      @endif
+    </div>
+    <span>
+      {{Auth::user()->name }} | {{ Auth::user()->tipo}}&nbsp;&nbsp;
+    </span>
+    <form method="POST" action="{{ route('logout') }}">
+      @csrf   
+      <button class="btn btn-danger ">
+        <x-responsive-nav-link class="text-decoration-none text-white" :href="route('logout')"
+          onclick="event.preventDefault();
+          this.closest('form').submit();">
+          {{ __('Log Out') }}
+        </x-responsive-nav-link>
+      </button>
+    </form>
+  </div>
+</nav>
+
 </header>
 
 <body>

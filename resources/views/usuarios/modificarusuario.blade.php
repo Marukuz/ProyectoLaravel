@@ -1,17 +1,17 @@
 @extends('plantillaTareas')
 @section('contenido')
 <br>
-<h1 style="text-align: center;">Añadir Empleado</h1><br>
+<h1 style="text-align: center;">Modificar Empleado</h1><br>
 <div id="formulario">
-    <form action="{{ route('usuarios.store') }}" class="col-9" method="POST">
-
+    <form action="{{ route('usuarios.update',$usuarios) }}" class="col-9" method="POST">
+    @method('put')
         <!-- PRIMERA FILA -->
         <div class="row">
             <div class="col-4">
                 <!-- Filtrado de errores -->
                 DNI:
                 <br>
-                <input type="text" class="form-control" name="dni" value="{{ old('dni') }}">
+                <input type="text" class="form-control" name="dni" value="{{ old('dni',$usuarios['dni']) }}">
                 @error('dni')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
@@ -21,7 +21,7 @@
                 <!-- Filtrado de errores -->
                 Correo:
                 <br>
-                <input type="text" class="form-control" name="email" value="{{ old('email') }}">
+                <input type="text" class="form-control" name="email" value="{{ old('email',$usuarios['email']) }}">
                 @error('email')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
@@ -30,7 +30,7 @@
                 <!-- Filtrado de errores -->
                 Nombre:
                 <br>
-                <input type="text" class="form-control" name="name" value="{{ old('name') }}">
+                <input type="text" class="form-control" name="name" value="{{ old('name',$usuarios['name']) }}">
                 @error('name')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
@@ -39,21 +39,11 @@
         <br>
         <!-- SEGUNDA FILA -->
         <div class="row">
-            <div class="col-6">
-                <!-- Filtrado de errores -->
-                Contraseña:
-                <br>
-                <input type="password" class="form-control" name="password" value="{{ old('password') }}">
-                @error('password')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-            
-            </div>
-            <div class="col-6">
+            <div class="col-12">
                 <!-- Filtrado de errores -->
                 Telefono:
                 <br>
-                <input type="text" class="form-control" name="telefono" value="{{ old('telefono') }}">
+                <input type="text" class="form-control" name="telefono" value="{{ old('telefono',$usuarios['telefono']) }}">
                 @error('telefono')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
@@ -66,7 +56,7 @@
                 <!-- Filtrado de errores -->
                 Direccion:
                 <br>
-                <input type="text" class="form-control" name="direccion" value="{{ old('direccion') }}">
+                <input type="text" class="form-control" name="direccion" value="{{ old('direccion',$usuarios['direccion']) }}">
                 @error('direccion')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
@@ -77,7 +67,7 @@
                 Tipo:
                 <br>
                 <select class="form-select" name="tipo">
-                    <option selected>{{ old('tipo') }}</option>
+                    <option selected>{{ old('tipo',$usuarios['tipo']) }}</option>
                     <option>Administrador</option>
                     <option>Operario</option>
                 </select>

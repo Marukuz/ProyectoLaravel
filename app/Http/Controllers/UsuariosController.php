@@ -75,6 +75,8 @@ class UsuariosController extends Controller
     public function edit($id)
     {
         //
+        $usuarios = User::find($id);
+        return view('usuarios/modificarusuario',compact("usuarios"));
     }
 
     /**
@@ -87,6 +89,17 @@ class UsuariosController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $datos = $request->validate([
+            'dni'=>['required','regex:/((^[A-Z]{1}[0-9]{7}[A-Z0-9]{1}$|^[T]{1}[A-Z0-9]{8}$)|^[0-9]{8}[A-Z]{1}$)/'],
+            'name'=>'required|regex:/^[a-z]+$/i',
+            'email'=>'required|email',
+            'telefono'=>['required','regex:/(\+34|0034|34)?[ -]*(6|7|8|9)[ -]*([0-9][ -]*){8}/'],
+            'direccion'=>'required',
+            'tipo'=>'required',
+        ]);
+        $usuario = user::find($id);
+        $usuario->update($datos);
+        return redirect()->route('usuarios.index');
     }
 
     /**
