@@ -20,9 +20,9 @@
                 <div class="col-3">
                     Cliente:
                     <select class="form-select" name="clientes_id">
-                        <option selected>{{ old('clientes_id',$tarea->clientes->nombre) }}</option>
+                        <option selected value="{{$tarea->clientes->id}}">{{ old('clientes_id',$tarea->clientes->nombre) }}</option>
                         @foreach($clientes as $cliente)
-                        <option>{{$cliente->nombre}}</option>
+                        <option value="{{$cliente->id}}">{{$cliente->nombre}}</option>
                         @endforeach
                     </select>
                     @error('clientes_id')
@@ -31,7 +31,7 @@
                 </div>
                 <div class="col-3">
                     Correo Electronico:<br>
-                    <input type="text" class="form-control" name="correo" value="{{$tarea['correo'] ?? ''}}">
+                    <input type="text" class="form-control" name="correo" value="{{old('correo',$tarea['correo']) }}">
                     @error('correo')
                     <span class="text-danger">{{$message}}</span>
                     @enderror
@@ -42,14 +42,14 @@
             <div class="row">
                 <div class="col-6">
                     Nombre: <br>
-                    <input type="text" class="form-control" name="nombre" value="{{$tarea['nombre'] ?? ''}}">
+                    <input type="text" class="form-control" name="nombre" value="{{old('nombre',$tarea['nombre'])}}">
                     @error('nombre')
                     <span class="text-danger">{{$message}}</span>
                     @enderror
                 </div>
                 <div class="col-6">
                     Apellido: <br>
-                    <input type="text" class="form-control" name="apellido" value="{{$tarea['apellido'] ?? ''}}">
+                    <input type="text" class="form-control" name="apellido" value="{{old('apellido',$tarea['apellido'])}}">
                     @error('apellido')
                     <span class="text-danger">{{$message}}</span>
                     @enderror
@@ -60,21 +60,21 @@
             <div class="row">
                 <div class="col-4">
                     Telefono:<br>
-                    <input type="text" class="form-control" name="telefono" value="{{$tarea['telefono'] ?? ''}}">
+                    <input type="text" class="form-control" name="telefono" value="{{old('telefono',$tarea['telefono'])}}">
                     @error('telefono')
                     <span class="text-danger">{{$message}}</span>
                     @enderror
                 </div>
                 <div class="col-4">
                     Direccion:<br>
-                    <input type="text" class="form-control" name="direccion" value="{{$tarea['direccion'] ?? ''}}">
+                    <input type="text" class="form-control" name="direccion" value="{{old('direccion',$tarea['direccion'])}}">
                     @error('direccion')
                     <span class="text-danger">{{$message}}</span>
                     @enderror
                 </div>
                 <div class="col-4">
                     Poblacion:<br>
-                    <input type="text" class="form-control" name="poblacion" value="{{$tarea['poblacion'] ?? ''}}">
+                    <input type="text" class="form-control" name="poblacion" value="{{old('poblacion',$tarea['poblacion'])}}">
                     @error('poblacion')
                     <span class="text-danger">{{$message}}</span>
                     @enderror
@@ -85,7 +85,7 @@
            <div class="row">
                 <div class="col-4">
                     Codigo Postal:<br>
-                    <input type="text" class="form-control" name="codigo_postal" value="{{$tarea['codigo_postal'] ?? ''}}">
+                    <input type="text" class="form-control" name="codigo_postal" value="{{old('codigo_postal',$tarea['codigo_postal'])}}">
                     @error('codigo_postal')
                     <span class="text-danger">{{$message}}</span>
                     @enderror
@@ -103,14 +103,13 @@
                     @enderror
                 </div>
                 <div class="col-4">
-                    Operario encargado: <br>
+                Operario:
+                <br>
                     <select class="form-select" name="empleados_id">
-                        <option selected></option>
-                        <option>Marc</option>
-                        <option>Kike</option>
-                        <option>Lara</option>
-                        <option>Jesus</option>
-                        <option>David</option>
+                        <option selected value="{{$tarea->empleados->id}}">{{ $tarea->empleados->nombre }}</option>
+                        @foreach($operarios as $operario)
+                        <option value="{{$operario->id}}">{{$operario->nombre}}</option>
+                        @endforeach
                     </select>
                     @error('empleados_id')
                     <span class="text-danger">{{$message}}</span>
@@ -122,12 +121,12 @@
            <div class="row">
                 <div class="col-4">
                     Fecha creacion: <br>
-                    <input type="date" class="form-control" name="fechac" value="{{$tarea['fecha_creacion'] ?? ''}}" readonly><br>
+                    <input type="datetime-local" class="form-control" name="fechac" value="{{$tarea['fecha_creacion'] ?? ''}}" readonly><br>
 
                 </div>
                 <div class="col-4">
                     Fecha Realizacion: <br>
-                    <input type="date" class="form-control" name="fecha_realizacion"  value="{{$tarea['fecha_realizacion'] ?? ''}}"><br>
+                    <input type="datetime-local" class="form-control" name="fecha_realizacion"  value="{{old('fecha_realizacion',$tarea['fecha_realizacion'])}}"><br>
                     @error('fecha_realizacion')
                     <span class="text-danger">{{$message}}</span>
                     @enderror
@@ -151,21 +150,21 @@
             <div class="row">
                 <div class="col-4">
                     Descripcion: <br>
-                    <textarea class="form-control" name="descripcion">{{$tarea['descripcion']}}</textarea>
+                    <textarea class="form-control" name="descripcion">{{old('descripcion',$tarea['descripcion'])}}</textarea>
                     @error('descripcion')
                     <span class="text-danger">{{$message}}</span>
                     @enderror
                 </div>
                 <div class="col-4">
                     Anotacion inicial: <br>
-                    <textarea class="form-control" name="anotacioni" >{{$tarea['anotacion_inicio'] }}</textarea>
+                    <textarea class="form-control" name="anotacion_inicio" >{{old('anotacion_inicio',$tarea['anotacion_inicio'])}}</textarea>
                     @error('anotacion_inicio')
                     <span class="text-danger">{{$message}}</span>
                     @enderror
                 </div>
                 <div class="col-4">
                     Anotacion final: <br>
-                    <textarea class="form-control" name="anotacionf" >{{$tarea['anotacion_final']}}</textarea>
+                    <textarea class="form-control" name="anotacion_final" >{{old('anotacion_final',$tarea['anotacion_final'])}}</textarea>
                     @error('anotacion_final')
                     <span class="text-danger">{{$message}}</span>
                     @enderror

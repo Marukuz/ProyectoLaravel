@@ -75,6 +75,8 @@ class TareasController extends Controller
         $datos['estado_tarea'] = 'B';
         $datos['clientes_id'] = $clienteid;
         $datos['empleados_id'] = $operarioid;
+        $fechaactual = date('Y-m-d H:i:s');
+        $datos['fecha_creacion'] = $fechaactual;
         
         Tareas::insert($datos);
         return redirect()->route('tareas.index');
@@ -146,6 +148,9 @@ class TareasController extends Controller
             'clientes_id'=>'required',
         ]);
 
+        $tarea = tareas::find($id);
+        $tarea->update($datos);
+        return redirect()->route('tareas.index');
     }
 
     /**

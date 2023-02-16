@@ -139,7 +139,7 @@
                 <!-- Filtrado de errores -->
                 Fecha:
                 <br>
-                <input type="date" class="form-control" name="fecha_realizacion" value="{{ old('fecha_realizacion') }}">
+                <input type="datetime-local" class="form-control" name="fecha_realizacion" value="{{ old('fecha_realizacion') }}">
                 @error('fecha_realizacion')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
