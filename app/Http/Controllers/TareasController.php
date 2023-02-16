@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\tareas;
 use App\Models\provincias;
 use App\Models\clientes;
-use App\Models\empleados;
+use App\Models\User;
 
 
 class TareasController extends Controller
@@ -32,7 +32,7 @@ class TareasController extends Controller
     public function create()
     {
         //
-        $operarios = empleados::all()->where('tipo','=','operario');
+        $operarios = User::all()->where('tipo','=','Operario');
         $clientes = clientes::all();
         $provincias = provincias::all();
         return view('tareas/añadirtarea',compact("provincias","clientes","operarios"));
@@ -58,7 +58,7 @@ class TareasController extends Controller
             'poblacion'=>'required',
             'codigo_postal'=>'required|regex:/^([0-9]{5})$/',
             'provincia'=>'required',
-            'empleados_id'=>'required',
+            'users_id'=>'required',
             'fecha_realizacion'=>'nullable',
             'descripcion'=>'required',
             'anotacion_inicio'=>'nullable',
@@ -70,11 +70,11 @@ class TareasController extends Controller
         
         $clienteid = clientes::find($datos['clientes_id'])->id;
 
-        $operarioid = empleados::find($datos['empleados_id'])->id;
+        $operarioid = User::find($datos['users_id'])->id;
         
         $datos['estado_tarea'] = 'B';
         $datos['clientes_id'] = $clienteid;
-        $datos['empleados_id'] = $operarioid;
+        $datos['users_id'] = $operarioid;
         $fechaactual = date('Y-m-d H:i:s');
         $datos['fecha_creacion'] = $fechaactual;
         
@@ -147,7 +147,7 @@ class TareasController extends Controller
     {
         //
         $tarea = tareas::find($id);
-        $operarios = empleados::where('tipo','=','operario')->get();
+        $operarios = User::where('tipo','=','operario')->get();
         $clientes = clientes::where('nombre','!=',$tarea->clientes->nombre)->get();
         $provincias = provincias::all();
 
@@ -175,7 +175,7 @@ class TareasController extends Controller
             'poblacion'=>'required',
             'codigo_postal'=>'required|regex:/^([0-9]{5})$/',
             'provincia'=>'required',
-            'empleados_id'=>'required',
+            'users_id'=>'required',
             'estado_tarea'=>'required',
             'fecha_realizacion'=>'nullable',
             'descripcion'=>'required',

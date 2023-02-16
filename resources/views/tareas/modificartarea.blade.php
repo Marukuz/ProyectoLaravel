@@ -19,7 +19,7 @@
                 </div>
                 <div class="col-3">
                     Cliente:
-                    <select class="form-select" name="clientes_id">
+                    <select class="form-select" name="clientes_id">Marukuz/proyecto_larave
                         <option selected value="{{$tarea->clientes->id}}">{{ old('clientes_id',$tarea->clientes->nombre) }}</option>
                         @foreach($clientes as $cliente)
                         <option value="{{$cliente->id}}">{{$cliente->nombre}}</option>
@@ -105,13 +105,13 @@
                 <div class="col-4">
                 Operario:
                 <br>
-                    <select class="form-select" name="empleados_id">
-                        <option selected value="{{$tarea->empleados->id}}">{{ $tarea->empleados->nombre }}</option>
+                    <select class="form-select" name="users_id">
+                        <option selected value="{{$tarea->users->id}}">{{ $tarea->users->name }}</option>
                         @foreach($operarios as $operario)
-                        <option value="{{$operario->id}}">{{$operario->nombre}}</option>
+                        <option value="{{$operario->id}}">{{$operario->name}}</option>
                         @endforeach
                     </select>
-                    @error('empleados_id')
+                    @error('users_id')
                     <span class="text-danger">{{$message}}</span>
                     @enderror
                 </div>

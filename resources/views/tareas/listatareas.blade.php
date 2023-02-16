@@ -26,7 +26,7 @@
           <td>{{$tarea->poblacion}}</td>
           <td>{{$tarea->provincia}}</td>
           <td>{{$tarea->estado_tarea}}</td>
-          <td>{{$tarea->empleados->nombre}}</td>
+          <td>{{$tarea->users->name}}</td>
           <td>{{$tarea->descripcion}}</td>
           <td>{{$tarea->anotacion_inicio}}</td>
           <td>{{$tarea->fecha_realizacion}}</td>

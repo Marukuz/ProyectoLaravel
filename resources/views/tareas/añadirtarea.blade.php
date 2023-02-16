@@ -125,13 +125,13 @@
                 <!-- Filtrado de errores -->
                 Operario:
                 <br>
-                <select class="form-select" name="empleados_id">
-                    <option selected>{{ old('empleados_id') }}</option>
+                <select class="form-select" name="users_id">
+                    <option selected>{{ old('users_id') }}</option>
                     @foreach($operarios as $operario)
-                    <option value="{{$operario->id}}">{{$operario->nombre}}</option>
+                    <option value="{{$operario->id}}">{{$operario->name}}</option>
                     @endforeach
                 </select>
-                @error('empleados_id')
+                @error('users_id')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
             </div>

@@ -28,15 +28,15 @@ class tareas extends Model
         "anotacion_final",
         "clientes_id",
         "empleados_id",
-      ];
+    ];
 
     use HasFactory;
 
     public function clientes(){
         return $this->belongsTo(clientes::class);
     }
-    public function empleados(){
-        return $this->belongsTo(empleados::class);
+    public function users(){
+        return $this->belongsTo(User::class);
     }
 
     public $timestamps = false;

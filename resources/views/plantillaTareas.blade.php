@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="{{asset('assets/css/tareas.css')}}">
     <title></title>
 </head>
@@ -17,10 +17,17 @@
                 <div class="navbar-nav">
                     <a class="nav-link text-light" href="/tareas">Ver Tareas</a>
                     <a class="nav-link text-light" href="/tareaspendientes">Ver Tareas Pendientes</a>
-                    <a class="nav-link text-light" href="/tareas/create">Añadir tarea</a>
+                    <a class="nav-link text-light" href="/tareas/create">Añadir Tarea</a>
                 </div>
+                <div class="navbar-nav">
+                    <a class="nav-link text-light" href="/tareas">Añadir Empleado</a>
+                </div>
+                @if(Auth::user()->tipo=="Administrador")
+                @endif
             </div>
-            <a class="nav-link" href="index.php?controller=usuariosController&action=Usuarios::verUsuarios"><button class="btn btn-primary">Usuarios</button></a>&nbsp&nbsp
+            <span>
+                {{Auth::user()->name }} | {{ Auth::user()->tipo}}&nbsp;&nbsp;
+            </span>
             <form method="POST" action="{{ route('logout') }}">
                     @csrf   
                     <button class="btn btn-danger "><x-responsive-nav-link class="text-decoration-nonetext-decoration-none text-white" :href="route('logout')"
