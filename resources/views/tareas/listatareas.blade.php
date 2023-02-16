@@ -31,9 +31,10 @@
           <td>{{$tarea->anotacion_inicio}}</td>
           <td>{{$tarea->fecha_realizacion}}</td>
           <td>
-          <a href="/"><button class="btn btn-success">Ver</button></a>
+          <a href="{{ route('tareacompleta',$tarea) }}"><button class="btn btn-success">Ver</button></a>
           <a href="{{ route('tareas.edit',$tarea) }}"><button class="btn btn-warning">Modificar</button></a>
           <a href="/"><button class="btn btn-danger">Eliminar</button></a>
+          <a href="{{ route('completartareaview',$tarea) }}"><button class="btn btn-primary">Completar</button></a>
           </td>
         <tr>
         @endforeach

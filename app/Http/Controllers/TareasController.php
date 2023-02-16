@@ -95,12 +95,48 @@ class TareasController extends Controller
 
     }
 
+    /**
+     * 
+     * Muestra todas las tareas pendientes.
+     * 
+     */
     public function showPending(){
         //
         $tareas = tareas::where('estado_tarea','=','P')->get();
         return view('tareas/listatareaspendientes',['tareas'=>$tareas]);
     }
+    
+    /**
+     *
+     * Muestra una tarea completa en concreto
+     */
+    public function tareaCompleta($id){
+        $tarea = tareas::find($id);
+        return view('tareas/tareacompleta',compact("tarea"));
 
+    }
+    /**
+     * 
+     * Funcion que envia el formulario para completar una tarea
+     */
+    public function completarTareaView($id){
+        $tarea = tareas::find($id);
+        return view('tareas/completartarea',compact("tarea"));
+    }
+    /**
+     * 
+     * Funcion que completa la tarea con los datos recibidos.
+     */
+    public function completarTarea(Request $request,$id){
+        $datos = $request->validate([
+            'estado_tarea'=>'required',
+            'anotacion_inicio'=>'nullable',
+            'anotacion_final'=>'nullable',
+        ]);
+        $tarea = tareas::find($id);
+        $tarea->update($datos);
+        return redirect()->route('tareas.index');
+    }
     /**
      * Show the form for editing the specified resource.
      *
