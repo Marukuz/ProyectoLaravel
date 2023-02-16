@@ -20,7 +20,8 @@
                     <a class="nav-link text-light" href="/tareas/create">Añadir Tarea</a>
                 </div>
                 <div class="navbar-nav">
-                    <a class="nav-link text-light" href="/tareas">Añadir Empleado</a>
+                    <a class="nav-link text-light" href="/usuarios">Ver Empleado</a>
+                    <a class="nav-link text-light" href="/usuarios/create">Añadir Empleado</a>
                 </div>
                 @if(Auth::user()->tipo=="Administrador")
                 @endif

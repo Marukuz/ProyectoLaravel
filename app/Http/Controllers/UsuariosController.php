@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UsuariosController extends Controller
 {
@@ -15,6 +16,8 @@ class UsuariosController extends Controller
     public function index()
     {
         //
+        $usuarios = User::paginate(10);
+        return view('usuarios/listausuarios',['usuarios'=>$usuarios]);
     }
 
     /**
@@ -25,6 +28,7 @@ class UsuariosController extends Controller
     public function create()
     {
         //
+        return view('usuarios/añadirusuario');
     }
 
     /**
@@ -36,6 +40,19 @@ class UsuariosController extends Controller
     public function store(Request $request)
     {
         //
+        $datos = $request->validate([
+            'dni'=>['required','regex:/((^[A-Z]{1}[0-9]{7}[A-Z0-9]{1}$|^[T]{1}[A-Z0-9]{8}$)|^[0-9]{8}[A-Z]{1}$)/'],
+            'name'=>'required|regex:/^[a-z]+$/i',
+            'email'=>'required|email',
+            'telefono'=>['required','regex:/(\+34|0034|34)?[ -]*(6|7|8|9)[ -]*([0-9][ -]*){8}/'],
+            'direccion'=>'required',
+            'tipo'=>'required',
+            'password'=>'required',
+
+        ]);
+        $datos['password'] = bcrypt($datos['password']);
+        User::insert($datos);
+        return redirect()->route('usuarios.index');
     }
 
     /**

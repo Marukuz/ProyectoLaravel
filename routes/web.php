@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TareasController;
+use App\Http\Controllers\UsuariosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,5 +36,6 @@ Route::controller(TareasController::class)->group(function(){
 
 Route::group(['middleware' => 'auth'], function() {
     Route::resource('tareas', TareasController::class); 
+    Route::resource('usuarios', UsuariosController::class); 
 });
 
