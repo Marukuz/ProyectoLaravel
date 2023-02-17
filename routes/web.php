@@ -28,9 +28,9 @@ require __DIR__.'/auth.php';
 
 Route::controller(TareasController::class)->group(function(){
     Route::get('/tareaspendientes',[TareasController::class,'showPending'])->middleware(['auth','admin'])->name('tareaspendientes');
-    Route::get('/tareacompleta/{id}',[TareasController::class,'tareaCompleta'])->middleware('auth')->name('tareacompleta');
-    Route::get('/completartarea/{id}',[TareasController::class,'completarTareaView'])->middleware('auth')->name('completartareaview');
-    Route::put('/completar/{id}',[TareasController::class,'completarTarea'])->middleware('auth')->name('completartarea'); 
+    Route::get('/tareacompleta/{id}',[TareasController::class,'tareaCompleta'])->middleware(['auth','admin'])->name('tareacompleta');
+    Route::get('/completartarea/{id}',[TareasController::class,'completarTareaView'])->middleware(['auth','admin'])->name('completartareaview');
+    Route::put('/completar/{id}',[TareasController::class,'completarTarea'])->middleware(['auth','admin'])->name('completartarea'); 
 });
 
 Route::controller(UsuariosController::class)->group(function(){
@@ -40,5 +40,6 @@ Route::controller(UsuariosController::class)->group(function(){
 Route::group(['middleware' => 'auth'], function() {
     Route::resource('tareas', TareasController::class); 
     Route::resource('usuarios', UsuariosController::class); 
+    Route::resource('clientes', ClientesController::class); 
 });
 
