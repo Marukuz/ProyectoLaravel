@@ -4,9 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class tareas extends Model
 {
+    use SoftDeletes,HasFactory;
+
     protected $table = "tareas";
     protected $fillable =  [
         "id",
@@ -29,8 +33,6 @@ class tareas extends Model
         "clientes_id",
         "empleados_id",
     ];
-
-    use HasFactory;
 
     public function clientes(){
         return $this->belongsTo(clientes::class);

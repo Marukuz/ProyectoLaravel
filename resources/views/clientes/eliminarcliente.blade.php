@@ -1,8 +1,9 @@
 @extends('plantillaTareas')
 @section('contenido')
-  <div class="container-fluid"> <br>
+<div class="container-fluid"> <br>
     <table class="table">
       <thead class="table-dark">
+      <h1 style="text-align: center;">Quiere eliminar al siguiente cliente?</h1>
         <tr>
           <th scope="col">ID</th>
           <th scope="col">DNI</th>
@@ -12,11 +13,9 @@
           <th scope="col">Pais</th>
           <th scope="col">Moneda</th>
           <th scope="col">Importe Mensual</th>
-          <th></th>
         </tr>
       </thead>
       <tbody>
-        @foreach($clientes as $cliente)
         <tr>
           <td>{{$cliente->id}}</td>
           <td>{{$cliente->dni}}</td>
@@ -26,16 +25,15 @@
           <td>{{$cliente->pais}}</td>
           <td>{{$cliente->moneda}}</td>
           <td>{{$cliente->importe_mensual}}</td>
-          <td>
-            <a href="{{ route('clientes.edit',$cliente) }}"><button class="btn btn-warning">Modificar</button></a>
-            <a href="{{ route('eliminarcliente',$cliente) }}"><button class="btn btn-danger">Eliminar</button></a>
-          </td>
         <tr>
-        @endforeach
       </tbody>
     </table>
-    <div class="pagination">
-      {{ $clientes->links() }}
+    <div style="text-align: center;">
+      <form action=" {{ route('clientes.destroy', $cliente) }} " method="post">
+      @method('delete')
+          <input type="submit" class="btn btn-danger" value="Si">
+          <a href="{{ route('clientes.index') }}" class="btn btn-success">No</a>
+      </form>
     </div>
-  </div>
+</div>
 @endsection

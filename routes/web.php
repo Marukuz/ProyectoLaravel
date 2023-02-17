@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TareasController;
 use App\Http\Controllers\UsuariosController;
+use App\Http\Controllers\ClientesController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,24 +19,25 @@ use App\Http\Controllers\UsuariosController;
 */
 
 
+require __DIR__.'/auth.php';
 
 Route::get('/', function () {
     return view('plantillatareas');
 })->middleware(['auth', 'verified'])->name('plantillatareas');
 
-
-  
-require __DIR__.'/auth.php';
-
 Route::controller(TareasController::class)->group(function(){
-    Route::get('/tareaspendientes',[TareasController::class,'showPending'])->middleware(['auth','admin'])->name('tareaspendientes');
-    Route::get('/tareacompleta/{id}',[TareasController::class,'tareaCompleta'])->middleware(['auth','admin'])->name('tareacompleta');
-    Route::get('/completartarea/{id}',[TareasController::class,'completarTareaView'])->middleware(['auth','admin'])->name('completartareaview');
-    Route::put('/completar/{id}',[TareasController::class,'completarTarea'])->middleware(['auth','admin'])->name('completartarea'); 
+    Route::get('/tareaspendientes','showPending')->middleware(['auth','admin'])->name('tareaspendientes');
+    Route::get('/tareacompleta/{id}','tareaCompleta')->middleware(['auth','admin'])->name('tareacompleta');
+    Route::get('/completartarea/{id}','completarTareaView')->middleware(['auth','admin'])->name('completartareaview');
+    Route::put('/completar/{id}','completarTarea')->middleware(['auth','admin'])->name('completartarea'); 
+    Route::get('/eliminartarea/{id}','confirmDestroy')->middleware(['auth','admin'])->name('eliminartarea');
 });
 
 Route::controller(UsuariosController::class)->group(function(){
+});
 
+Route::controller(ClientesController::class)->group(function(){
+    Route::get('/eliminarcliente/{id}','confirmDestroy')->middleware(['auth','admin'])->name('eliminarcliente');
 });
 
 Route::group(['middleware' => 'auth'], function() {

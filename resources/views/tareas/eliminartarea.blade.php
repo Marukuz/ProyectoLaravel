@@ -1,8 +1,9 @@
 @extends('plantillaTareas')
 @section('contenido')
-  <div class="container-fluid"> <br>
+<div class="container-fluid"> <br>
     <table class="table">
       <thead class="table-dark">
+      <h1 style="text-align: center;">Quiere eliminar la siguiente tarea?</h1>
         <tr>
           <th scope="col">ID</th>
           <th scope="col">Cliente</th>
@@ -14,11 +15,9 @@
           <th scope="col">Descripcion</th>
           <th scope="col">Anotacion Inicial</th>
           <th scope="col">Fecha de realizacion</th>
-          <th></th>
         </tr>
       </thead>
       <tbody>
-        @foreach($tareas as $tarea)
         <tr>
           <td>{{$tarea->id}}</td>
           <td>{{$tarea->clientes->nombre}}</td>
@@ -30,18 +29,15 @@
           <td>{{$tarea->descripcion}}</td>
           <td>{{$tarea->anotacion_inicio}}</td>
           <td>{{$tarea->fecha_realizacion}}</td>
-          <td>
-          <a href="{{ route('tareacompleta',$tarea) }}"><button class="btn btn-success">Ver</button></a>
-          <a href="{{ route('tareas.edit',$tarea) }}"><button class="btn btn-warning">Modificar</button></a>
-          <a href="{{ route('eliminartarea',$tarea) }}"><button class="btn btn-danger">Eliminar</button></a>
-          <a href="{{ route('completartareaview',$tarea) }}"><button class="btn btn-primary">Completar</button></a>
-          </td>
         <tr>
-        @endforeach
       </tbody>
     </table>
-    <div class="pagination">
-      {{ $tareas->links() }}
+    <div style="text-align: center;">
+      <form action=" {{ route('tareas.destroy', $tarea) }} " method="post">
+      @method('delete')
+          <input type="submit" class="btn btn-danger" value="Si">
+          <a href="{{ route('tareas.index') }}" class="btn btn-success">No</a>
+      </form>
     </div>
-  </div>
+</div>
 @endsection

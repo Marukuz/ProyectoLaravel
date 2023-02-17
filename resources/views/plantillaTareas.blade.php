@@ -25,10 +25,10 @@
             Tareas
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li> <a class="nav-link text-light" href="/tareas">Ver Tareas</a></li>
-            <li><a class="nav-link text-light" href="/tareas/create">Añadir Tarea</a></li>
+            <li> <a class="nav-link" href="/tareas">Ver Tareas</a></li>
+            <li><a class="nav-link" href="/tareas/create">Añadir Tarea</a></li>
             <div class="dropdown-divider"></div>
-            <li> <a class="nav-link text-light" href="/tareaspendientes">Ver Tareas Pendientes</a></li>
+            <li> <a class="nav-link" href="/tareaspendientes">Ver Tareas Pendientes</a></li>
           </ul>
         </div>
         <div class="dropdown">
@@ -45,14 +45,14 @@
             Clientes
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="/usuarios">Ver Clientes</a></li>
-            <li><a class="dropdown-item" href="/usuarios/create">Añadir Clientes</a></li>
+            <li><a class="dropdown-item" href="/clientes">Ver Clientes</a></li>
+            <li><a class="dropdown-item" href="/clientes/create">Añadir Clientes</a></li>
           </ul>
         </div>
       </div>
       @endif
     </div>
-    <span>
+    <span class="text-light">
       {{Auth::user()->name }} | {{ Auth::user()->tipo}}&nbsp;&nbsp;
     </span>
     <form method="POST" action="{{ route('logout') }}">

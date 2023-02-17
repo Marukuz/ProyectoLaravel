@@ -190,6 +190,15 @@ class TareasController extends Controller
     }
 
     /**
+     * 
+     * Vista para confirmar si se quiere borrar o no la vista.
+     */
+    public function confirmDestroy($id){
+
+        $tarea = tareas::find($id);
+        return view('tareas/eliminartarea',compact("tarea"));
+    }
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -198,5 +207,8 @@ class TareasController extends Controller
     public function destroy($id)
     {
         //
+        Tareas::destroy($id);
+        return redirect()->route('tareas.index');
+
     }
 }
