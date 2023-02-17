@@ -102,6 +102,11 @@ class UsuariosController extends Controller
         return redirect()->route('usuarios.index');
     }
 
+    public function confirmDestroy($id){
+
+        $usuario = User::find($id);
+        return view('usuarios/eliminarusuario',compact("usuario"));
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -111,5 +116,8 @@ class UsuariosController extends Controller
     public function destroy($id)
     {
         //
+        User::destroy($id);
+        return redirect()->route('usuarios.index');
+
     }
 }

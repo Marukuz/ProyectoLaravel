@@ -34,13 +34,14 @@ Route::controller(TareasController::class)->group(function(){
 });
 
 Route::controller(UsuariosController::class)->group(function(){
+    Route::get('/eliminarusuario/{id}','confirmDestroy')->middleware(['auth','admin'])->name('eliminarusuario');
 });
 
 Route::controller(ClientesController::class)->group(function(){
     Route::get('/eliminarcliente/{id}','confirmDestroy')->middleware(['auth','admin'])->name('eliminarcliente');
 });
 
-Route::group(['middleware' => 'auth'], function() {
+Route::group(['middleware' => ['auth']], function() {
     Route::resource('tareas', TareasController::class); 
     Route::resource('usuarios', UsuariosController::class); 
     Route::resource('clientes', ClientesController::class); 

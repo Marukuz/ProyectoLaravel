@@ -1,8 +1,9 @@
 @extends('plantillaTareas')
 @section('contenido')
-  <div class="container-fluid"> <br>
+<div class="container-fluid"> <br>
     <table class="table">
       <thead class="table-dark">
+      <h1 style="text-align: center;">Quiere eliminar al siguiente Empleado?</h1>
         <tr>
           <th scope="col">ID</th>
           <th scope="col">DNI</th>
@@ -11,11 +12,9 @@
           <th scope="col">Telefono</th>
           <th scope="col">Direccion</th>
           <th scope="col">Tipo</th>
-          <th></th>
         </tr>
       </thead>
       <tbody>
-        @foreach($usuarios as $usuario)
         <tr>
           <td>{{$usuario->id}}</td>
           <td>{{$usuario->dni}}</td>
@@ -24,16 +23,15 @@
           <td>{{$usuario->telefono}}</td>
           <td>{{$usuario->direccion}}</td>
           <td>{{$usuario->tipo}}</td>
-          <td>
-            <a href="{{ route('usuarios.edit',$usuario) }}"><button class="btn btn-warning">Modificar</button></a>
-            <a href="{{ route('eliminarusuario',$usuario) }}"><button class="btn btn-danger">Eliminar</button></a>
-          </td>
         <tr>
-        @endforeach
       </tbody>
     </table>
-    <div class="pagination">
-      {{ $usuarios->links() }}
+    <div style="text-align: center;">
+      <form action=" {{ route('usuarios.destroy', $usuario) }} " method="post">
+      @method('delete')
+          <input type="submit" class="btn btn-danger" value="Si">
+          <a href="{{ route('usuarios.index') }}" class="btn btn-success">No</a>
+      </form>
     </div>
-  </div>
+</div>
 @endsection

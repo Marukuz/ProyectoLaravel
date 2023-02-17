@@ -27,7 +27,6 @@
           <td>{{$cliente->moneda}}</td>
           <td>{{$cliente->importe_mensual}}</td>
           <td>
-            <a href="{{ route('clientes.edit',$cliente) }}"><button class="btn btn-warning">Modificar</button></a>
             <a href="{{ route('eliminarcliente',$cliente) }}"><button class="btn btn-danger">Eliminar</button></a>
           </td>
         <tr>

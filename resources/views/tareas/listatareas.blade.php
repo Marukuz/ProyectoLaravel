@@ -31,9 +31,11 @@
           <td>{{$tarea->anotacion_inicio}}</td>
           <td>{{$tarea->fecha_realizacion}}</td>
           <td>
+          @if(Auth::user()->tipo=="Administrador")
           <a href="{{ route('tareacompleta',$tarea) }}"><button class="btn btn-success">Ver</button></a>
           <a href="{{ route('tareas.edit',$tarea) }}"><button class="btn btn-warning">Modificar</button></a>
           <a href="{{ route('eliminartarea',$tarea) }}"><button class="btn btn-danger">Eliminar</button></a>
+          @endif
           <a href="{{ route('completartareaview',$tarea) }}"><button class="btn btn-primary">Completar</button></a>
           </td>
         <tr>

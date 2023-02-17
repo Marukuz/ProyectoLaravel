@@ -18,19 +18,19 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      @if(Auth::user()->tipo=="Administrador")
       <div class="navbar-nav me-auto">
         <div class="dropdown">
         <a class="nav-link text-light dropdown-toggle" href="#" role="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
             Tareas
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li> <a class="nav-link" href="/tareas">Ver Tareas</a></li>
+            <li> <a class="nav-link" href="/tareas">Ver Tareas</a></li>            
             <li><a class="nav-link" href="/tareas/create">Añadir Tarea</a></li>
             <div class="dropdown-divider"></div>
             <li> <a class="nav-link" href="/tareaspendientes">Ver Tareas Pendientes</a></li>
           </ul>
         </div>
+        @if(Auth::user()->tipo=="Administrador")
         <div class="dropdown">
           <a class="nav-link text-light dropdown-toggle" href="#" role="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
             Empleados
