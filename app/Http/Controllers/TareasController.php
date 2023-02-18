@@ -19,7 +19,7 @@ class TareasController extends Controller
     public function index()
     {
         //
-
+        
         $tareas = tareas::paginate(10);
         return view('tareas/listatareas',['tareas'=>$tareas]);
     }
@@ -32,6 +32,7 @@ class TareasController extends Controller
     public function create()
     {
         //
+        
         $operarios = User::all()->where('tipo','=','Operario');
         $clientes = clientes::all();
         $provincias = provincias::all();

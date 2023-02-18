@@ -41,9 +41,7 @@ Route::controller(ClientesController::class)->group(function(){
     Route::get('/eliminarcliente/{id}','confirmDestroy')->middleware(['auth','admin'])->name('eliminarcliente');
 });
 
-Route::group(['middleware' => ['auth']], function() {
-    Route::resource('tareas', TareasController::class); 
-    Route::resource('usuarios', UsuariosController::class); 
-    Route::resource('clientes', ClientesController::class); 
-});
+Route::resource('tareas', TareasController::class)->middleware('auth'); 
+Route::resource('usuarios', UsuariosController::class)->middleware(['auth','admin']); 
+Route::resource('clientes', ClientesController::class)->middleware(['auth','admin']); 
 
