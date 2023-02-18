@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-02-2023 a las 13:10:33
+-- Tiempo de generación: 18-02-2023 a las 23:01:57
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -61,14 +61,22 @@ INSERT INTO `clientes` (`id`, `dni`, `nombre`, `telefono`, `correo`, `cuenta_cor
 CREATE TABLE `cuotas` (
   `id` int(11) NOT NULL,
   `concepto` varchar(45) DEFAULT NULL,
-  `fecha_emision` date DEFAULT NULL,
+  `fecha_emision` datetime DEFAULT NULL,
   `importe` int(11) DEFAULT NULL,
   `pagada` varchar(45) DEFAULT NULL,
-  `fecha_pago` date DEFAULT NULL,
+  `fecha_pago` datetime DEFAULT NULL,
   `notas` varchar(45) DEFAULT NULL,
   `clientes_id` int(11) NOT NULL,
+  `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `cuotas`
+--
+
+INSERT INTO `cuotas` (`id`, `concepto`, `fecha_emision`, `importe`, `pagada`, `fecha_pago`, `notas`, `clientes_id`, `updated_at`, `deleted_at`) VALUES
+(1, 'test', '2023-02-18 22:39:59', 60, 'No', NULL, 'test', 4, '2023-02-18 23:01:00', '2023-02-18 23:01:00');
 
 -- --------------------------------------------------------
 
@@ -557,6 +565,12 @@ ALTER TABLE `clientes`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `cuotas`
+--
+ALTER TABLE `cuotas`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -613,6 +627,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `clientes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `cuotas`
+--
+ALTER TABLE `cuotas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `failed_jobs`
