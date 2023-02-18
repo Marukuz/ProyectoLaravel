@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-02-2023 a las 13:28:03
+-- Tiempo de generación: 18-02-2023 a las 13:10:33
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -48,8 +48,9 @@ CREATE TABLE `clientes` (
 
 INSERT INTO `clientes` (`id`, `dni`, `nombre`, `telefono`, `correo`, `cuenta_corriente`, `pais`, `moneda`, `importe_mensual`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, '49958855X', 'Jesus', 123456789, 'jesus@gmail.com', '123', 'Espana', 'Euro', NULL, NULL, '2023-02-17 12:56:10', '2023-02-17 12:56:10'),
-(3, '77750726P', 'Marc', 625280695, 'marc@gmail.com', 'ES49123412341234', 'España', 'EUR', NULL, NULL, NULL, NULL),
-(4, '50496027X', 'Lara', 625270492, 'lara@gmail.com', 'ES49123123123', 'Japón', 'JPY', NULL, NULL, NULL, NULL);
+(3, '77750726P', 'Marc', 625280695, 'marc@gmail.com', 'ES49123412341234', 'España', 'EUR', '10', NULL, NULL, NULL),
+(4, '50496027X', 'Lara', 625270492, 'lara@gmail.com', 'ES49123123123', 'Japón', 'JPY', '10', NULL, NULL, NULL),
+(5, '77750726P', 'Jesus', 965678921, 'jesus@gmail.com', 'ES49123123123', 'Andorra', 'EUR', '10', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -65,7 +66,8 @@ CREATE TABLE `cuotas` (
   `pagada` varchar(45) DEFAULT NULL,
   `fecha_pago` date DEFAULT NULL,
   `notas` varchar(45) DEFAULT NULL,
-  `clientes_id` int(11) NOT NULL
+  `clientes_id` int(11) NOT NULL,
+  `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- --------------------------------------------------------
@@ -509,7 +511,9 @@ INSERT INTO `tareas` (`id`, `dni`, `nombre`, `apellido`, `telefono`, `correo`, `
 (2, '77750726P', 'Marc', 'garrido', 625280695, 'marccocmc@gmail.com', 'pepe', 'Hong Kong', 12212, 'Huelva', 'P', NULL, NULL, 'pepe', NULL, NULL, 4, 1, '2023-02-17 13:23:20'),
 (3, '77750726P', 'Marc', 'garrido', 625280695, 'larastar28.1.1@gmail.com', 'Calle Almanzor 27', 'Aljaraque', 12212, 'Alava', 'B', NULL, NULL, 'Test', NULL, NULL, 3, 1, '2023-02-17 13:23:22'),
 (4, '50496027X', 'Lara', 'Lezama', 625280695, 'larastar28.1.1@gmail.com', 'Calle Rafael Alberti 5', 'Sevilla', 41009, 'Sevilla', 'B', '2023-02-16 12:51:07', '2023-02-16 13:33:00', 'Test Descripcion', 'Test Anotacion Inicial', 'Tarea completada sin muchos problemas', 3, 1, NULL),
-(6, '77750726P', 'Marc', 'Garrido', 625280695, 'marccocmc@gmail.com', 'Calle Almanzor 27', 'Sevilla', 41009, 'Huelva', 'P', '2023-02-16 18:43:14', NULL, 'Si', NULL, NULL, 4, 1, NULL);
+(6, '77750726P', 'Marc', 'Garrido', 625280695, 'marccocmc@gmail.com', 'Calle Almanzor 27', 'Sevilla', 41009, 'Huelva', 'P', '2023-02-16 18:43:14', NULL, 'Si', NULL, NULL, 4, 1, NULL),
+(7, '77750726P', 'Marc', 'Garrido', 625280695, 'marccocmc@gmail.com', 'Calle Almanzor 27', 'Aljaraque', 41009, 'Alicante', 'B', '2023-02-18 10:15:29', '2023-02-18 10:15:00', 'Test', NULL, NULL, 3, 3, NULL),
+(8, '77750726P', 'Marc', 'Garrido', 625280695, 'marccocmc@gmail.com', 'Calle Almanzor 27', 'Aljaraque', 41009, 'Alicante', 'B', '2023-02-18 10:15:29', '2023-02-18 10:15:00', 'Test', NULL, NULL, 3, 3, NULL);
 
 -- --------------------------------------------------------
 
@@ -538,7 +542,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `dni`, `name`, `email`, `email_verified_at`, `password`, `telefono`, `direccion`, `remember_token`, `created_at`, `updated_at`, `tipo`, `deleted_at`) VALUES
-(1, '77750726P', 'Marc', 'marc@gmail.com', NULL, '$2y$10$MSzNfRAnS8AhcG4iARZ7Eu81URarIvEp2iItOBJW6pZwYDQvTpTWW', 625280695, 'Calle Jabugo 8', 'XEu8CZsFmDsyj14nVsWJ8tjnyjPm4FXVsv4v8seqloW3Rbb3ktsYczhZmvqt', '2023-02-14 17:42:15', '2023-02-16 19:34:43', 'Administrador', NULL),
+(1, '77750726P', 'Marc', 'marc@gmail.com', NULL, '$2y$10$MSzNfRAnS8AhcG4iARZ7Eu81URarIvEp2iItOBJW6pZwYDQvTpTWW', 625280695, 'Calle Jabugo 8', 'pdeHjguJYoGmalOFTHCIiQZHBFCk7YBJ2sLP2j7l7HWKr5LY3jA50WFsnsAg', '2023-02-14 17:42:15', '2023-02-16 19:34:43', 'Administrador', NULL),
 (3, '50496027X', 'Lara', 'lara@gmail.com', NULL, '$2y$10$PJBAqbkWOxr9OkWZAvNdu.wu7iqQqG6LpCVp37TeCNComtSK3Nwh.', 625280695, 'Calle Rafael Alberti 5', NULL, NULL, NULL, 'Operario', NULL),
 (5, '77750726P', 'Lara', 'marcss@gmail.com', NULL, '$2y$10$EXxG4L1GDPf6I5o/cSy2YOF7cQwXllA3FPEUgcjRGMoLHtG.KRngK', 625280695, 'cas', NULL, NULL, '2023-02-17 12:10:05', 'Administrador', '2023-02-17 13:10:05');
 
@@ -608,7 +612,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `failed_jobs`
@@ -632,7 +636,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT de la tabla `tareas`
 --
 ALTER TABLE `tareas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
