@@ -7,6 +7,8 @@ use App\Models\tareas;
 use App\Models\provincias;
 use App\Models\clientes;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+
 
 
 class TareasController extends Controller
@@ -19,9 +21,14 @@ class TareasController extends Controller
     public function index()
     {
         //
+        if(Auth::user()->tipo=="Administrador"){
+            $tareas = tareas::paginate(2);
+            return view('tareas/listatareas',['tareas'=>$tareas]);    
+        }else{
+            $tareas = tareas::where('users_id','=',Auth::user()->id)->paginate(10);
+            return view('tareas/listatareas',['tareas'=>$tareas]);    
+        }
         
-        $tareas = tareas::paginate(10);
-        return view('tareas/listatareas',['tareas'=>$tareas]);
     }
 
     /**
@@ -32,11 +39,14 @@ class TareasController extends Controller
     public function create()
     {
         //
-        
-        $operarios = User::all()->where('tipo','=','Operario');
-        $clientes = clientes::all();
-        $provincias = provincias::all();
-        return view('tareas/añadirtarea',compact("provincias","clientes","operarios"));
+        if(Auth::user()->tipo=="Administrador"){
+            $operarios = User::all()->where('tipo','=','Operario');
+            $clientes = clientes::all();
+            $provincias = provincias::all();
+            return view('tareas/añadirtarea',compact("provincias","clientes","operarios"));
+        }else{
+            return redirect()->route('tareas.index');
+        }
     }
 
     /**
@@ -103,8 +113,12 @@ class TareasController extends Controller
      */
     public function showPending(){
         //
-        $tareas = tareas::where('estado_tarea','=','P')->get();
-        return view('tareas/listatareaspendientes',['tareas'=>$tareas]);
+        if(Auth::user()->tipo=="Administrador"){
+            $tareas = tareas::where('estado_tarea','=','P')->get();
+            return view('tareas/listatareaspendientes',['tareas'=>$tareas]);
+        }else{
+            return redirect()->route('tareas.index');
+        }
     }
     
     /**
@@ -112,17 +126,22 @@ class TareasController extends Controller
      * Muestra una tarea completa en concreto
      */
     public function tareaCompleta($id){
-        $tarea = tareas::find($id);
-        return view('tareas/tareacompleta',compact("tarea"));
-
+        if(Auth::user()->tipo=="Administrador"){
+            $tarea = tareas::find($id);
+            return view('tareas/tareacompleta',compact("tarea"));
+        }else{
+            return redirect()->route('tareas.index');
+        }
     }
     /**
      * 
      * Funcion que envia el formulario para completar una tarea
      */
     public function completarTareaView($id){
-        $tarea = tareas::find($id);
-        return view('tareas/completartarea',compact("tarea"));
+        if(Auth::user()->tipo!="Administrador"){
+            $tarea = tareas::find($id);
+            return view('tareas/completartarea',compact("tarea"));
+        }
     }
     /**
      * 
@@ -147,12 +166,16 @@ class TareasController extends Controller
     public function edit($id)
     {
         //
-        $tarea = tareas::find($id);
-        $operarios = User::where('tipo','=','operario')->get();
-        $clientes = clientes::where('nombre','!=',$tarea->clientes->nombre)->get();
-        $provincias = provincias::all();
+        if(Auth::user()->tipo=="Administrador"){
+            $tarea = tareas::find($id);
+            $operarios = User::where('tipo','=','operario')->get();
+            $clientes = clientes::where('nombre','!=',$tarea->clientes->nombre)->get();
+            $provincias = provincias::all();
 
-        return view('tareas/modificartarea',compact("tarea","clientes","operarios","provincias"));
+            return view('tareas/modificartarea',compact("tarea","clientes","operarios","provincias"));
+        }else{
+            return redirect()->route('tareas.index');
+        }
 
     }
 
@@ -195,9 +218,12 @@ class TareasController extends Controller
      * Vista para confirmar si se quiere borrar o no la vista.
      */
     public function confirmDestroy($id){
-
-        $tarea = tareas::find($id);
-        return view('tareas/eliminartarea',compact("tarea"));
+        if(Auth::user()->tipo=="Administrador"){
+            $tarea = tareas::find($id);
+            return view('tareas/eliminartarea',compact("tarea"));
+        }else{
+            return redirect()->route('tareas.index');
+        }
     }
     /**
      * Remove the specified resource from storage.

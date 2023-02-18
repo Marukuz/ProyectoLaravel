@@ -99,10 +99,10 @@
                 <div class="col-4">
                 Operario:
                 <br>
-                    <select class="form-select" name="empleados_id" disabled>
-                        <option selected value="{{$tarea->empleados->id}}">{{ $tarea->empleados->nombre }}</option>
+                    <select class="form-select" name="users_id" disabled>
+                        <option selected value="{{$tarea->users->id}}">{{ $tarea->users->name }}</option>
                     </select>
-                    @error('empleados_id')
+                    @error('users_id')
                     <span class="text-danger">{{$message}}</span>
                     @enderror
                 </div>

@@ -36,7 +36,9 @@
           <a href="{{ route('tareas.edit',$tarea) }}"><button class="btn btn-warning">Modificar</button></a>
           <a href="{{ route('eliminartarea',$tarea) }}"><button class="btn btn-danger">Eliminar</button></a>
           @endif
+          @if(Auth::user()->tipo!="Administrador")
           <a href="{{ route('completartareaview',$tarea) }}"><button class="btn btn-primary">Completar</button></a>
+          @endif
           </td>
         <tr>
         @endforeach
