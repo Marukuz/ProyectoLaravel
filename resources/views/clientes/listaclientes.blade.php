@@ -28,7 +28,7 @@
           <td>{{$cliente->importe_mensual}}</td>
           <td>
             <a href="{{ route('cuotas.show',$cliente) }}"><button class="btn btn-success">Ver Cuotas</button></a>
-            <a href="/"><button class="btn btn-primary">Añadir Cuota</button></a>
+            <a href="{{ route('crearcuota',$cliente) }}"><button class="btn btn-primary">Añadir Cuota</button></a>
             <a href="{{ route('eliminarcliente',$cliente) }}"><button class="btn btn-danger">Eliminar</button></a>
           </td>
         <tr>

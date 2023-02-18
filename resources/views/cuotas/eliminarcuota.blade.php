@@ -11,11 +11,9 @@
           <th scope="col">Pagada</th>
           <th scope="col">Fecha Pago</th>
           <th scope="col">Notas</th>
-          <th></th>
         </tr>
       </thead>
       <tbody>
-        @foreach($cuotas as $cuota)
         <tr>
           <td>{{$cuota->id}}</td>
           <td>{{$cuota->concepto}}</td>
@@ -24,16 +22,15 @@
           <td>{{$cuota->pagada}}</td>
           <td>{{$cuota->fecha_pago}}</td>
           <td>{{$cuota->notas}}</td>
-          <td>
-            <a href="{{route('cuotas.edit',$cuota)}}"><button class="btn btn-warning">Modificar</button></a>
-            <a href="{{route('eliminarcuota',$cuota)}}"><button class="btn btn-danger">Eliminar</button></a>
-          </td>
         <tr>
-        @endforeach
       </tbody>
     </table>
-    <div class="pagination">
-      {{ $cuotas->links() }}
+    <div style="text-align: center;">
+      <form action=" {{ route('cuotas.destroy', $cuota) }} " method="post">
+      @method('delete')
+          <input type="submit" class="btn btn-danger" value="Si">
+          <a href="{{ route('cuotas.show',$cuota->clientes_id) }}" class="btn btn-success">No</a>
+      </form>
     </div>
   </div>
 @endsection

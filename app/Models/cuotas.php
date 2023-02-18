@@ -10,6 +10,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class cuotas extends Model
 {
     protected $table = "cuotas";
+    protected $fillable =  [
+        "id",
+        "concepto",
+        "fecha_emision",
+        "importe",
+        "pagada",
+        "fecha_pago",
+        "notas",
+        "clientes_id",
+        "deleted_at",
+    ];
+    
     use SoftDeletes,HasFactory;
 
 }
