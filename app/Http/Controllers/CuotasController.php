@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\cuotas;
 use App\Models\clientes;
-
+use App\Mail\Correo;
 
 
 class CuotasController extends Controller
@@ -19,6 +20,36 @@ class CuotasController extends Controller
     public function index()
     {
         //
+    }
+
+
+    public function generarCuotasMensualesView()
+    {
+        //
+        return view('cuotas/cuotamensual');
+
+    }
+
+    public function generarCuotasMensuales(Request $request)
+    {
+        //
+        $datos = $request->validate([
+            'concepto'=>'required',
+            'notas'=>'required',
+        ]);
+        $datos['fecha_emision'] = date('Y-m-d H:i:s');
+        $datos['pagada'] = 'No';
+        $clientes = clientes::all();
+
+        foreach ($clientes as $cliente){
+            $correo = new Correo($cliente->nombre);   
+            $datos['clientes_id'] = $cliente->id;    
+            $datos['importe'] = $cliente->importe_mensual; 
+            $destinatario = $cliente->correo;
+            Mail::to($destinatario)->send($correo);
+            cuotas::insert($datos);
+        }
+        return redirect()->route('clientes.index');
     }
 
     /**

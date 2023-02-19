@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-02-2023 a las 23:01:57
+-- Tiempo de generación: 19-02-2023 a las 17:16:12
 -- Versión del servidor: 10.4.27-MariaDB
--- Versión de PHP: 8.2.0
+-- Versión de PHP: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -48,7 +48,7 @@ CREATE TABLE `clientes` (
 
 INSERT INTO `clientes` (`id`, `dni`, `nombre`, `telefono`, `correo`, `cuenta_corriente`, `pais`, `moneda`, `importe_mensual`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, '49958855X', 'Jesus', 123456789, 'jesus@gmail.com', '123', 'Espana', 'Euro', NULL, NULL, '2023-02-17 12:56:10', '2023-02-17 12:56:10'),
-(3, '77750726P', 'Marc', 625280695, 'marc@gmail.com', 'ES49123412341234', 'España', 'EUR', '10', NULL, NULL, NULL),
+(3, '77750726P', 'Marc', 625280695, 'marccocmc@gmail.com', 'ES49123412341234', 'España', 'EUR', '10', NULL, '2023-02-19 15:52:31', NULL),
 (4, '50496027X', 'Lara', 625270492, 'lara@gmail.com', 'ES49123123123', 'Japón', 'JPY', '10', NULL, NULL, NULL),
 (5, '77750726P', 'Jesus', 965678921, 'jesus@gmail.com', 'ES49123123123', 'Andorra', 'EUR', '10', NULL, NULL, NULL);
 
@@ -76,7 +76,14 @@ CREATE TABLE `cuotas` (
 --
 
 INSERT INTO `cuotas` (`id`, `concepto`, `fecha_emision`, `importe`, `pagada`, `fecha_pago`, `notas`, `clientes_id`, `updated_at`, `deleted_at`) VALUES
-(1, 'test', '2023-02-18 22:39:59', 60, 'No', NULL, 'test', 4, '2023-02-18 23:01:00', '2023-02-18 23:01:00');
+(1, 'test', '2023-02-18 22:39:59', 60, 'No', NULL, 'test', 4, '2023-02-18 23:01:00', '2023-02-18 23:01:00'),
+(2, 'TEST', '2023-02-19 11:59:15', 10, 'Si', NULL, 'TEST', 3, '2023-02-19 11:59:22', NULL),
+(3, 'TEST CUOTAS MENSUALES ENERO', '2023-02-19 16:42:49', 10, 'No', NULL, 'TEST CUOTAS MENSUALES ENERO', 3, NULL, NULL),
+(4, 'TEST CUOTAS MENSUALES ENERO', '2023-02-19 16:42:49', 10, 'No', NULL, 'TEST CUOTAS MENSUALES ENERO', 4, NULL, NULL),
+(5, 'TEST CUOTAS MENSUALES ENERO', '2023-02-19 16:42:49', 10, 'No', NULL, 'TEST CUOTAS MENSUALES ENERO', 5, NULL, NULL),
+(6, 'TEST CORREO', '2023-02-19 17:12:13', 10, 'No', NULL, 'TEST CORREO', 3, NULL, NULL),
+(7, 'TEST CORREO', '2023-02-19 17:12:13', 10, 'No', NULL, 'TEST CORREO', 4, NULL, NULL),
+(8, 'TEST CORREO', '2023-02-19 17:12:13', 10, 'No', NULL, 'TEST CORREO', 5, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -550,7 +557,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `dni`, `name`, `email`, `email_verified_at`, `password`, `telefono`, `direccion`, `remember_token`, `created_at`, `updated_at`, `tipo`, `deleted_at`) VALUES
-(1, '77750726P', 'Marc', 'marc@gmail.com', NULL, '$2y$10$MSzNfRAnS8AhcG4iARZ7Eu81URarIvEp2iItOBJW6pZwYDQvTpTWW', 625280695, 'Calle Jabugo 8', 'pdeHjguJYoGmalOFTHCIiQZHBFCk7YBJ2sLP2j7l7HWKr5LY3jA50WFsnsAg', '2023-02-14 17:42:15', '2023-02-16 19:34:43', 'Administrador', NULL),
+(1, '77750726P', 'Marc', 'marc@gmail.com', NULL, '$2y$10$MSzNfRAnS8AhcG4iARZ7Eu81URarIvEp2iItOBJW6pZwYDQvTpTWW', 625280695, 'Calle Jabugo 8', 'TJZBS1rKMPUlMyJ9e2fgkxQmWOvITkzN9Rydxvl6MSTTQ8uLWzk9xvooFVw7', '2023-02-14 17:42:15', '2023-02-16 19:34:43', 'Administrador', NULL),
 (3, '50496027X', 'Lara', 'lara@gmail.com', NULL, '$2y$10$PJBAqbkWOxr9OkWZAvNdu.wu7iqQqG6LpCVp37TeCNComtSK3Nwh.', 625280695, 'Calle Rafael Alberti 5', NULL, NULL, NULL, 'Operario', NULL),
 (5, '77750726P', 'Lara', 'marcss@gmail.com', NULL, '$2y$10$EXxG4L1GDPf6I5o/cSy2YOF7cQwXllA3FPEUgcjRGMoLHtG.KRngK', 625280695, 'cas', NULL, NULL, '2023-02-17 12:10:05', 'Administrador', '2023-02-17 13:10:05');
 
@@ -632,7 +639,7 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT de la tabla `cuotas`
 --
 ALTER TABLE `cuotas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `failed_jobs`

@@ -1,9 +1,9 @@
 @extends('plantillaTareas')
 @section('contenido')
 <br>
-<h1 style="text-align: center;">Modificar Empleado</h1><br>
+<h1 style="text-align: center;">Modificar Cliente</h1><br>
 <div id="formulario">
-    <form action="{{ route('usuarios.update',$usuarios) }}" class="col-9" method="POST">
+    <form action="{{ route('clientes.update',$cliente) }}" class="col-9" method="POST">
     @method('put')
         <!-- PRIMERA FILA -->
         <div class="row">
@@ -11,7 +11,7 @@
                 <!-- Filtrado de errores -->
                 DNI:
                 <br>
-                <input type="text" class="form-control" name="dni" value="{{ old('dni',$usuarios['dni']) }}">
+                <input type="text" class="form-control" name="dni" value="{{ old('dni',$cliente['dni']) }}">
                 @error('dni')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
@@ -21,8 +21,8 @@
                 <!-- Filtrado de errores -->
                 Correo:
                 <br>
-                <input type="text" class="form-control" name="email" value="{{ old('email',$usuarios['email']) }}">
-                @error('email')
+                <input type="text" class="form-control" name="correo" value="{{ old('correo',$cliente['correo']) }}">
+                @error('correo')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
             </div>
@@ -30,8 +30,8 @@
                 <!-- Filtrado de errores -->
                 Nombre:
                 <br>
-                <input type="text" class="form-control" name="name" value="{{ old('name',$usuarios['name']) }}">
-                @error('name')
+                <input type="text" class="form-control" name="nombre" value="{{ old('nombre',$cliente['nombre']) }}">
+                @error('nombre')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
             </div>
@@ -43,7 +43,7 @@
                 <!-- Filtrado de errores -->
                 Telefono:
                 <br>
-                <input type="text" class="form-control" name="telefono" value="{{ old('telefono',$usuarios['telefono']) }}">
+                <input type="text" class="form-control" name="telefono" value="{{ old('telefono',$cliente['telefono']) }}">
                 @error('telefono')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
@@ -54,24 +54,25 @@
         <div class="row">
             <div class="col-6">
                 <!-- Filtrado de errores -->
-                Direccion:
+                Cuenta Corriente:
                 <br>
-                <input type="text" class="form-control" name="direccion" value="{{ old('direccion',$usuarios['direccion']) }}">
-                @error('direccion')
+                <input type="text" class="form-control" name="cuenta_corriente" value="{{ old('cuenta_corriente',$cliente['cuenta_corriente']) }}">
+                @error('cuenta_corriente')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
             
             </div>
             <div class="col-6">
                 <!-- Filtrado de errores -->
-                Tipo:
+                Pais:
                 <br>
-                <select class="form-select" name="tipo">
-                    <option selected>{{ old('tipo',$usuarios['tipo']) }}</option>
-                    <option>Administrador</option>
-                    <option>Operario</option>
+                <select class="form-select" name="pais">
+                    <option selected>{{ old('pais',$cliente['pais']) }}</option>
+                    @foreach ($paises as $pais)
+                    <option>{{$pais['nombre']}}</option>
+                    @endforeach
                 </select>
-                @error('tipo')
+                @error('pais')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
             </div>

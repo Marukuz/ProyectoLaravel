@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="{{asset('assets/css/tareas.css')}}">
-    <title></title>
+    <title>Empresa</title>
 </head>
 <header>
 <nav class="navbar navbar-expand-lg bg-secondary">
@@ -59,6 +59,14 @@
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="/clientes">Ver Clientes</a></li>
             <li><a class="dropdown-item" href="/clientes/create">Añadir Clientes</a></li>
+          </ul>
+        </div>
+        <div class="dropdown">
+          <a class="nav-link text-light dropdown-toggle" href="#" role="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            Cuotas
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/generarcuotasview">Generar cuota mensual</a></li>
           </ul>
         </div>
       </div>

@@ -80,6 +80,9 @@ class ClientesController extends Controller
     public function edit($id)
     {
         //
+        $paises = paises::all();
+        $cliente = clientes::find($id);
+        return view('clientes/modificarcliente',compact("cliente","paises"));
     }
 
     /**
@@ -92,6 +95,23 @@ class ClientesController extends Controller
     public function update(Request $request, $id)
     {
         //
+
+        $datos = $request->validate([
+            'dni'=>['required','regex:/((^[A-Z]{1}[0-9]{7}[A-Z0-9]{1}$|^[T]{1}[A-Z0-9]{8}$)|^[0-9]{8}[A-Z]{1}$)/'],
+            'nombre'=>'required|regex:/^[a-z]+$/i',
+            'correo'=>'required|email',
+            'cuenta_corriente'=>'required',
+            'telefono'=>['required','regex:/(\+34|0034|34)?[ -]*(6|7|8|9)[ -]*([0-9][ -]*){8}/'],
+            'pais'=>'required',
+        ]);
+        $moneda = paises::where('nombre','=',$datos['pais'])->value('iso_moneda');
+
+        $datos['moneda']=$moneda;
+        $datos['importe_mensual'] = 10;
+        $cliente = clientes::find($id);
+
+        $cliente->update($datos);
+        return redirect()->route('clientes.index');
     }
 
     /**
