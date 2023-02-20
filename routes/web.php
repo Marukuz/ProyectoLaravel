@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\API\GithubAuthController;
+use App\Http\Controllers\API\GoogleAuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TareasController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\CuotasController;
+
 
 
 /*
@@ -53,4 +56,12 @@ Route::resource('usuarios', UsuariosController::class)->middleware(['auth','admi
 Route::resource('clientes', ClientesController::class)->middleware(['auth','admin']); 
 Route::resource('cuotas', CuotasController::class)->middleware(['auth','admin']); 
 
+Route::controller(GoogleAuthController::class)->group(function(){
+    Route::get('/auth/google/callback', 'handleCallback')->name('google.login.callback');
+    Route::get('/login-google','redirectToProvider')->name('google.login');
+});
 
+Route::controller(GithubAuthController::class)->group(function(){
+    Route::get('/auth/github/callback', 'handleCallback')->name('github.login.callback');
+    Route::get('/login-github','redirectToProvider')->name('github.login');
+});
