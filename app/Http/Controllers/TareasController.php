@@ -22,7 +22,7 @@ class TareasController extends Controller
     {
         //
         if(Auth::user()->tipo=="Administrador"){
-            $tareas = tareas::paginate(2);
+            $tareas = tareas::paginate(10);
             return view('tareas/listatareas',['tareas'=>$tareas]);    
         }else{
             $tareas = tareas::where('users_id','=',Auth::user()->id)->paginate(10);

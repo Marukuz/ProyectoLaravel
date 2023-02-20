@@ -94,7 +94,7 @@ class CuotasController extends Controller
     public function show($id)
     {
         //
-        $cuotas = cuotas::where('clientes_id','=',$id)->paginate(2);
+        $cuotas = cuotas::where('clientes_id','=',$id)->paginate(10);
         return view('cuotas/listacuotas',compact("cuotas"));
     }
 
