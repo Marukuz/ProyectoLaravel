@@ -27,7 +27,9 @@ class user extends Authenticatable
         'telefono',
         'direccion',
         'tipo',
-        'provider_id',
+        'fecha_alta',
+        'github_id',
+        'google_id',
     ];
 
     /**

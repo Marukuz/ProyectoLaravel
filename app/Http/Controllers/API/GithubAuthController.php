@@ -19,13 +19,15 @@ class GithubAuthController extends Controller
     public function handleCallback(){
         $githubUser = Socialite::driver('github')->user();
     
-        $user = User::firstOrCreate(
+        $user = User::updateOrCreate(
             [
                 'github_id' => $githubUser->getId(),
             ],
             [
                 'email' => $githubUser->getEmail(),
                 'name' => $githubUser->getName(),
+                'fecha_alta' => date('Y-m-d H:i:s'),
+                'tipo' => 'Operario',
             ],
         );
     

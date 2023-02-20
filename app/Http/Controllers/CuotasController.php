@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\cuotas;
 use App\Models\clientes;
 use App\Mail\Correo;
+use Illuminate\Support\Facades\App;
+
 
 
 class CuotasController extends Controller
@@ -22,6 +24,15 @@ class CuotasController extends Controller
         //
     }
 
+
+    public function generarPDF($id){
+        $cuota = cuotas::findOrFail($id);
+
+        $html = view('generarpdf', compact('cuota'))->render();
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadHTML($html);
+        return $pdf->stream();
+    }
 
     public function generarCuotasMensualesView()
     {

@@ -53,6 +53,7 @@ Route::controller(CuotasController::class)->group(function(){
     Route::get('/eliminarcuota/{id}','confirmDestroy')->middleware(['auth','admin'])->name('eliminarcuota');
     Route::get('/generarcuotasview','generarCuotasMensualesView')->middleware(['auth','admin'])->name('generarcuotasview');
     Route::post('/generarcuotas','generarCuotasMensuales')->middleware(['auth','admin'])->name('generarcuotas');
+    Route::get('/cuotas/{id}/pdf', 'generarPDF')->name('generarpdf');
 });
 
 // Resources
