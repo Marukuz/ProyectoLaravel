@@ -27,7 +27,6 @@ class GoogleAuthController extends Controller
                 'email' => $googleUser->getEmail(),
                 'name' => $googleUser->getName(),
                 'fecha_alta' => date('Y-m-d H:i:s'),
-                'tipo' => 'Operario',
             ],
         );
     

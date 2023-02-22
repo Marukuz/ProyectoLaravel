@@ -21,12 +21,12 @@
         @foreach($tareas as $tarea)
         <tr>
           <td>{{$tarea->id}}</td>
-          <td>{{$tarea->clientes->nombre}}</td>
+          <td>{{$tarea->clientes->nombre ?? 'No asignado'}}</td>
           <td>{{$tarea->telefono}}</td>
           <td>{{$tarea->poblacion}}</td>
           <td>{{$tarea->provincia}}</td>
           <td>{{$tarea->estado_tarea}}</td>
-          <td>{{$tarea->users->name}}</td>
+          <td>{{$tarea->users->name ?? 'No asignado'}}</td>
           <td>{{$tarea->descripcion}}</td>
           <td>{{$tarea->anotacion_inicio}}</td>
           <td>{{$tarea->fecha_realizacion}}</td>

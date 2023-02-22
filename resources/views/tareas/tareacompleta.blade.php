@@ -29,7 +29,7 @@
         <tr>
           <td>{{ $tarea['id'] }}</td>
           <td>{{ $tarea['dni'] }}</td>
-          <td>{{ $tarea->clientes->nombre }}</td>
+          <td>{{ $tarea->clientes->nombre ?? 'No asignado'}}</td>
           <td>{{ $tarea['nombre'] }}</td>
           <td>{{ $tarea['apellido'] }}</td>
           <td>{{ $tarea['telefono'] }}</td>
@@ -40,7 +40,7 @@
           <td>{{ $tarea['provincia'] }}</td>
           <td>{{ $tarea['estado_tarea'] }}</td>
           <td>{{ $tarea['fecha_creacion'] }}</td>
-          <td>{{ $tarea->users->name }}</td>
+          <td>{{ $tarea->users->name ?? 'No asignado' }}</td>
           <td>{{ $tarea['fecha_realizacion'] }}</td>
           <td>{{ $tarea['descripcion'] }}</td>
           <td>{{ $tarea['anotacion_inicio'] }}</td>

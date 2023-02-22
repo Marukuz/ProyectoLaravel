@@ -27,7 +27,6 @@ class GithubAuthController extends Controller
                 'email' => $githubUser->getEmail(),
                 'name' => $githubUser->getName(),
                 'fecha_alta' => date('Y-m-d H:i:s'),
-                'tipo' => 'Operario',
             ],
         );
     
