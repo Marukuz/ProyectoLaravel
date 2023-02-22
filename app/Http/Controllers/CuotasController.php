@@ -25,7 +25,7 @@ class CuotasController extends Controller
     }
 
 
-    public function generarPDF($id){
+    public function generarPDFView($id){
         $cuota = cuotas::findOrFail($id);
 
         $html = view('generarpdf', compact('cuota'))->render();
@@ -33,6 +33,16 @@ class CuotasController extends Controller
         $pdf->loadHTML($html);
         return $pdf->stream();
     }
+
+    public function generarPDF($cuota){
+        $html = view('cuotas/pdfcuota', compact('cuota'));
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadHTML($html);
+        $pdfContent = $pdf->output();
+
+        return $pdfContent;
+    }
+
 
     public function generarCuotasMensualesView()
     {
@@ -57,8 +67,16 @@ class CuotasController extends Controller
             $datos['clientes_id'] = $cliente->id;    
             $datos['importe'] = $cliente->importe_mensual; 
             $destinatario = $cliente->correo;
-            Mail::to($destinatario)->send($correo);
+            // Mail::to($destinatario)->send($correo);
             cuotas::insert($datos);
+            
+            $pdfContent = $this->generarPDF($datos);
+            Mail::send([], [], function ($message) use ($pdfContent, $destinatario,$cliente) {
+                $message->to($destinatario)
+                        ->subject('Cuota Mensual')
+                        ->text('Hola ' .$cliente->nombre. ' te enviamos la cuota mensual.')
+                        ->attachData($pdfContent, 'cuota.pdf');
+            });
         }
         return redirect()->route('clientes.index');
     }
