@@ -62,7 +62,7 @@
         <br>
         <!-- Tercera fila -->
         <div class="row">
-            <div class="col-12">
+            <div class="col-6">
                 <!-- Filtrado de errores -->
                 Pais:
                 <br>
@@ -73,6 +73,15 @@
                     @endforeach
                 </select>
                 @error('pais')
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+            </div>
+            <div class="col-6">
+                <!-- Filtrado de errores -->
+                Importe:
+                <br>
+                <input type="text" class="form-control" name="importe_mensual" value="{{ old('importe_mensual') }}">
+                @error('importe_mensual')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
             </div>

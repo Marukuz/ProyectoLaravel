@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\clientes;
 use App\Models\paises;
+use AmrShawky\LaravelCurrency\Facade\Currency;
 
 class ClientesController extends Controller
 {
@@ -41,6 +42,7 @@ class ClientesController extends Controller
      */
     public function store(Request $request)
     {
+        
         //
         $datos = $request->validate([
             'dni'=>['required','regex:/((^[A-Z]{1}[0-9]{7}[A-Z0-9]{1}$|^[T]{1}[A-Z0-9]{8}$)|^[0-9]{8}[A-Z]{1}$)/'],
@@ -49,13 +51,12 @@ class ClientesController extends Controller
             'cuenta_corriente'=>'required',
             'telefono'=>['required','regex:/(\+34|0034|34)?[ -]*(6|7|8|9)[ -]*([0-9][ -]*){8}/'],
             'pais'=>'required',
+            'importe_mensual'=>'required',
         ]);
-
         $moneda = paises::where('nombre','=',$datos['pais'])->value('iso_moneda');
-        
         $datos['moneda']=$moneda;
-        $datos['importe_mensual'] = 10;
-         
+        $converted = Currency::convert()->from($datos['moneda'])->to('EUR')->amount($request->importe_mensual)->round(2)->get();
+        $datos['importe_mensual'] = $converted;
         clientes::insert($datos);
         return redirect()->route('clientes.index');
     }

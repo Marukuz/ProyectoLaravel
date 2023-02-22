@@ -7,8 +7,7 @@ use App\Http\Controllers\TareasController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\CuotasController;
-
-
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +53,7 @@ Route::controller(CuotasController::class)->group(function(){
     Route::get('/generarcuotasview','generarCuotasMensualesView')->middleware(['auth','admin'])->name('generarcuotasview');
     Route::post('/generarcuotas','generarCuotasMensuales')->middleware(['auth','admin'])->name('generarcuotas');
     Route::get('/cuotas/{id}/pdf', 'generarPDF')->name('generarpdf');
+    Route::get('/pagarcuota/{id}','pagarCuota')->middleware(['auth','admin'])->name('pagarcuota');
 });
 
 // Resources
@@ -61,6 +61,13 @@ Route::resource('tareas', TareasController::class)->middleware('auth');
 Route::resource('usuarios', UsuariosController::class)->middleware(['auth','admin']); 
 Route::resource('clientes', ClientesController::class)->middleware(['auth','admin']); 
 Route::resource('cuotas', CuotasController::class)->middleware(['auth','admin']); 
+
+// Paypal
+Route::controller(PaymentController::class)->group(function(){
+    Route::get('/paypal/pay', 'payWithPaypal')->name('paypal.pay');
+    Route::get('/paypal/status','payPalStatus')->name('paypal.status');
+    Route::get('/pagocorrecto','pagoCorrecto')->name('pagofinalizado');
+});
 
 // Login Google
 Route::controller(GoogleAuthController::class)->group(function(){

@@ -162,7 +162,12 @@ class CuotasController extends Controller
         $cuota->update($datos);
         return redirect()->route('cuotas.show',$cuota->clientes_id);
     }
-
+    
+    public function pagarCuota($id){
+        $cuota = cuotas::find($id);
+        return view('cuotas/pagarcuota',compact("cuota"));
+    }
+    
     public function confirmDestroy($id){
         $cuota = cuotas::find($id);
         return view('cuotas/eliminarcuota',compact("cuota"));

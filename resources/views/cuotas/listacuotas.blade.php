@@ -27,6 +27,7 @@
           <td>
             <a href="{{route('generarpdf',$cuota)}}"><button class="btn btn-primary">Generar PDF</button></a>  
             <a href="{{route('cuotas.edit',$cuota)}}"><button class="btn btn-warning">Modificar</button></a>
+            <a href="{{route('pagarcuota',$cuota)}}"><button class="btn btn-success">Pagar</button></a>
             <a href="{{route('eliminarcuota',$cuota)}}"><button class="btn btn-danger">Eliminar</button></a>
           </td>
         <tr>

@@ -169,7 +169,7 @@ class TareasController extends Controller
         if(Auth::user()->tipo=="Administrador"){
             $tarea = tareas::find($id);
             $operarios = User::where('tipo','=','operario')->get();
-            $clientes = clientes::where('nombre','!=',$tarea->clientes->nombre)->get();
+            $clientes = clientes::where('nombre','!=',$tarea->clientes->nombre ?? '')->get();
             $provincias = provincias::all();
 
             return view('tareas/modificartarea',compact("tarea","clientes","operarios","provincias"));
