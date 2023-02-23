@@ -20,9 +20,9 @@ class PaymentController extends Controller
     private $amount;
     private $currency;
 
-    public function __construct($amount, $currency)
-    {
-
+    public function __construct($amount,$currency)
+    {    
+        
         $this->amount=$amount;
         $this->currency=$currency;
 
