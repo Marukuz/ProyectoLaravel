@@ -64,8 +64,8 @@ Route::resource('cuotas', CuotasController::class)->middleware(['auth','admin'])
 
 // Paypal
 Route::controller(PaymentController::class)->group(function(){
-    Route::get('/paypal/pay', 'payWithPaypal')->name('paypal.pay');
-    Route::get('/paypal/status','payPalStatus')->name('paypal.status');
+    Route::get('/paypal/pay/{id}', 'payWithPaypal')->name('paypal.pay');
+    Route::get('/paypal/status/{id}','payPalStatus')->name('paypal.status');
     Route::get('/pagocorrecto','pagoCorrecto')->name('pagofinalizado');
 });
 

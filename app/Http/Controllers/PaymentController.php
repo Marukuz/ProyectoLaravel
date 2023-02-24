@@ -13,18 +13,15 @@ use PayPal\Api\Payment;
 use PayPal\Api\PaymentExecution;
 use PayPal\Exception\PayPalConnectionException;
 use PayPal\Rest\ApiContext;
+use App\Models\cuotas;
 
 class PaymentController extends Controller
 {
     private $apiContext;
-    private $amount;
-    private $currency;
 
-    public function __construct($amount, $currency)
-    {
-
-        $this->amount=$amount;
-        $this->currency=$currency;
+    public function __construct()
+    {    
+    
 
         $payPalConfig = Config::get('paypal');
 
@@ -37,20 +34,20 @@ class PaymentController extends Controller
 
         $this->apiContext->setConfig($payPalConfig['settings']);
     }
-    public function payWithPayPal()
+    public function payWithPayPal($id)
     {
         $payer = new Payer();
         $payer->setPaymentMethod('paypal');
 
         $amount = new Amount();
-        $amount->setTotal($this->amount);
-        $amount->setCurrency($this->currency);
+        $amount->setTotal(cuotas::find($id)->importe);
+        $amount->setCurrency('EUR');
 
         $transaction = new Transaction();
         $transaction->setAmount($amount);
         $transaction->setDescription('Pago de cuota mensual');
 
-        $callbackUrl = url('/paypal/status');
+        $callbackUrl = url('/paypal/status/'.$id);
 
         $redirectUrls = new RedirectUrls();
         $redirectUrls->setReturnUrl($callbackUrl)
@@ -69,7 +66,7 @@ class PaymentController extends Controller
             echo $ex->getData();
         }
     }
-    public function payPalStatus(Request $request)
+    public function payPalStatus(Request $request,$id)
     {
         $paymentId = $request->input('paymentId');
         $payerId = $request->input('PayerID');
@@ -90,6 +87,9 @@ class PaymentController extends Controller
 
         if ($result->getState() === 'approved') {
             $status = 'Gracias! El pago a través de PayPal se ha ralizado correctamente.';
+            $cuota = cuotas::find($id);
+            $cuota->pagada = 'Si';
+            $cuota->save();  
             return redirect(route('pagofinalizado'))->with(compact('status'));
         }
 
