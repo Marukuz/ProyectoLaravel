@@ -34,6 +34,11 @@ Route::controller(TareasController::class)->group(function(){
     Route::get('/completartarea/{id}','completarTareaView')->middleware(['auth'])->name('completartareaview');
     Route::put('/completar/{id}','completarTarea')->middleware(['auth'])->name('completartarea'); 
     Route::get('/eliminartarea/{id}','confirmDestroy')->middleware(['auth','admin'])->name('eliminartarea');
+    Route::get('/añadirtarea','createCliente')->name('añadirtarea');
+    Route::post('/creartarea','storeCliente')->name('creartarea');
+    Route::get('/tareassinasignar','tareasSinAsignar')->middleware(['auth','admin'])->name('tareassinasignar');
+    Route::get('/añadiroperario/{id}','añadirOperario')->middleware(['auth','admin'])->name('añadiroperario');
+    Route::put('/asignaroperario/{id}','asignarOperario')->middleware(['auth','admin'])->name('asignaroperario');
 });
 
 // Rutas usuarios

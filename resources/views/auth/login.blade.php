@@ -30,7 +30,7 @@
                     {{ __('Has olvidado tu contraseña?') }}
                 </a>
             @endif
-        <div class="flex items-center justify-end mt-4">
+        <div class="flex items-center justify-center mt-4">
             <x-primary-button class="ml-3">
                 {{ __('Log in') }}
             </x-primary-button>
@@ -39,6 +39,11 @@
             </a>
             <a href="{{route('google.login')}}" class="ml-3 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
             Google
+            </a>  
+        </div>
+        <div class="flex items-center justify-center mt-4">
+            <a href="{{route('añadirtarea')}}" class="ml-3 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                Crear Tarea 
             </a>
         </div>
     </form>

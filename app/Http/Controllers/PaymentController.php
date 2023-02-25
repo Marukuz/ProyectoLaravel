@@ -14,6 +14,7 @@ use PayPal\Api\PaymentExecution;
 use PayPal\Exception\PayPalConnectionException;
 use PayPal\Rest\ApiContext;
 use App\Models\cuotas;
+use App\Models\clientes;
 
 class PaymentController extends Controller
 {
@@ -41,7 +42,7 @@ class PaymentController extends Controller
 
         $amount = new Amount();
         $amount->setTotal(cuotas::find($id)->importe);
-        $amount->setCurrency('EUR');
+        $amount->setCurrency(clientes::find(cuotas::find($id)->clientes_id)->moneda);
 
         $transaction = new Transaction();
         $transaction->setAmount($amount);

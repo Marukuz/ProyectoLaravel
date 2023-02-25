@@ -31,7 +31,7 @@ class tareas extends Model
         "anotacion_inicio",
         "anotacion_final",
         "clientes_id",
-        "empleados_id",
+        "users_id",
     ];
 
     public function clientes(){

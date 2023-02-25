@@ -39,6 +39,7 @@
             <li><a class="nav-link" href="/tareas/create">Añadir Tarea</a></li>
             <div class="dropdown-divider"></div>
             <li> <a class="nav-link" href="/tareaspendientes">Ver Tareas Pendientes</a></li>
+            <li> <a class="nav-link" href="/tareassinasignar">Ver Tareas sin Asignar</a></li>
           </ul>
         </div>
 

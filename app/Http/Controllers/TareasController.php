@@ -49,6 +49,48 @@ class TareasController extends Controller
         }
     }
 
+    public function createCliente()
+    {
+        //
+        $provincias = provincias::all();
+        return view('tareas/añadirtareacliente',compact("provincias"));
+    }
+
+
+    public function storeCliente(Request $request)
+    {
+        //
+
+        $datos = $request->validate([
+            'dni'=>['required','regex:/((^[A-Z]{1}[0-9]{7}[A-Z0-9]{1}$|^[T]{1}[A-Z0-9]{8}$)|^[0-9]{8}[A-Z]{1}$)/'],
+            'nombre'=>'required|regex:/^[a-z]+$/i',
+            'apellido'=>'required|regex:/^[a-z]+$/i',
+            'correo'=>'required|email',
+            'telefono'=>['required','regex:/(\+34|0034|34)?[ -]*(6|7|8|9)[ -]*([0-9][ -]*){8}/'],
+            'direccion'=>'required',
+            'poblacion'=>'required',
+            'codigo_postal'=>'required|regex:/^([0-9]{5})$/',
+            'provincia'=>'required',
+            'fecha_realizacion'=>'nullable',
+            'descripcion'=>'required',
+            'anotacion_inicio'=>'nullable',
+            'anotacion_final'=>'nullable',        
+        ]);
+
+        
+        $cliente = clientes::where('dni','=',$datos['dni'])->where('telefono','=',$datos['telefono'])->first();
+
+        
+        $datos['estado_tarea'] = 'B';
+        $datos['clientes_id'] = $cliente->id;
+        $fechaactual = date('Y-m-d H:i:s');
+        $datos['fecha_creacion'] = $fechaactual;
+        
+        Tareas::insert($datos);
+        return redirect()->route('login');
+        
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -115,12 +157,34 @@ class TareasController extends Controller
         //
         if(Auth::user()->tipo=="Administrador"){
             $tareas = tareas::where('estado_tarea','=','P')->get();
-            return view('tareas/listatareaspendientes',['tareas'=>$tareas]);
+            return view('tareas/listatareaspendientes',compact('tareas'));
         }else{
             return redirect()->route('tareas.index');
         }
     }
+
+    public function tareasSinAsignar(){
+        $tareas = tareas::where('users_id','=',NULL)->get();
+        return view('tareas/tareassinasignar',compact('tareas'));
+    }
     
+
+    public function añadirOperario($id){
+        $operarios = User::all()->where('tipo','=','Operario');
+        $tarea = tareas::find($id);
+        return view('tareas/añadiroperario',compact('tarea','operarios'));
+    }
+
+    public function asignarOperario(Request $request, $id){
+        $datos = $request->validate([
+            'users_id'=>'required',
+        ]);
+        $operarioid = User::find($datos['users_id'])->id;
+        $datos['users_id']=$operarioid;
+        $tarea = tareas::find($id);
+        $tarea->update($datos);
+        return redirect()->route('tareas.index');
+    }
     /**
      *
      * Muestra una tarea completa en concreto
