@@ -55,7 +55,7 @@ class ClientesController extends Controller
         ]);
         $moneda = paises::where('nombre','=',$datos['pais'])->value('iso_moneda');
         $datos['moneda']=$moneda;
-        $converted = Currency::convert()->from($datos['moneda'])->to('EUR')->amount($request->importe_mensual)->round(2)->get();
+        $converted = Currency::convert()->from('EUR')->to($datos['moneda'])->amount($request->importe_mensual)->round(2)->get();
         $datos['importe_mensual'] = $converted;
         clientes::insert($datos);
         return redirect()->route('clientes.index');

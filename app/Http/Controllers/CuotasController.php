@@ -24,14 +24,15 @@ class CuotasController extends Controller
         //
     }
 
-
     public function generarPDFView($id){
         $cuota = cuotas::findOrFail($id);
 
-        $html = view('generarpdf', compact('cuota'))->render();
+        $html = view('cuotas/pdfcuota', compact('cuota'));
         $pdf = App::make('dompdf.wrapper');
         $pdf->loadHTML($html);
-        return $pdf->stream();
+        $pdfContent = $pdf->stream();
+
+        return $pdfContent;
     }
 
     public function generarPDF($cuota){
@@ -63,13 +64,10 @@ class CuotasController extends Controller
         $clientes = clientes::all();
 
         foreach ($clientes as $cliente){
-            $correo = new Correo($cliente->nombre);   
-            $datos['clientes_id'] = $cliente->id;    
             $datos['importe'] = $cliente->importe_mensual; 
-            $destinatario = $cliente->correo;
-            // Mail::to($destinatario)->send($correo);
+            $datos['clientes_id'] = $cliente->id;    
             cuotas::insert($datos);
-            
+            $destinatario = $cliente->correo;
             $pdfContent = $this->generarPDF($datos);
             Mail::send([], [], function ($message) use ($pdfContent, $destinatario,$cliente) {
                 $message->to($destinatario)
