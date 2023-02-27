@@ -23,6 +23,7 @@ use App\Http\Controllers\PaymentController;
 
 require __DIR__.'/auth.php';
 
+// Ruta base
 Route::get('/', function () {
     return view('plantillatareas');
 })->middleware(['auth', 'verified'])->name('plantillatareas');
