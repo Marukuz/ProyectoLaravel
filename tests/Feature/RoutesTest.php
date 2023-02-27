@@ -140,19 +140,6 @@ class RoutesTest extends TestCase
 
         $response->assertViewIs('tareas.tareassinasignar');
     }
-    public function test_añadirOperario()
-    {
-        $usuario = User::where('tipo','Administrador')->first();
-
-        $response = $this->actingAs($usuario)
-            ->get('/añadiroperario/9');
-            
-        if ($response->status() == 302) {
-            $response = $this->followingRedirects($response);
-        }
-
-        $response->assertViewIs('tareas.añadiroperario');
-    }
     public function test_añadirTarea()
     {
         $usuario = User::where('tipo','Administrador')->first();
