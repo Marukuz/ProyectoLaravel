@@ -121,6 +121,7 @@ class CuotasController extends Controller
         return redirect()->route('clientes.index');
     }
 
+
     /**
      * Display the specified resource.
      *

@@ -1,5 +1,8 @@
 @extends('plantillaTareas')
 @section('contenido')
+  <br>
+  <h1 style="text-align: center;">Tareas Pendientes</h1>
+  <br>
   <div class="container-fluid"> <br>
     <table class="table">
       <thead class="table-dark">

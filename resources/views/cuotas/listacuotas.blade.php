@@ -1,5 +1,8 @@
 @extends('plantillaTareas')
 @section('contenido')
+  <br>
+  <h1 style="text-align: center;">Lista cuotas</h1>
+  <br>
   <div class="container-fluid"> <br>
     <table class="table">
       <thead class="table-dark">
@@ -27,7 +30,9 @@
           <td>
             <a href="{{route('generarpdf',$cuota)}}"><button class="btn btn-primary">Generar PDF</button></a>  
             <a href="{{route('cuotas.edit',$cuota)}}"><button class="btn btn-warning">Modificar</button></a>
+            @if($cuota->pagada == "No")
             <a href="{{route('paypal.pay',$cuota)}}"><button class="btn btn-success">Pagar</button></a>
+            @endif
             <a href="{{route('eliminarcuota',$cuota)}}"><button class="btn btn-danger">Eliminar</button></a>
           </td>
         <tr>

@@ -59,6 +59,7 @@ Route::controller(CuotasController::class)->group(function(){
     Route::get('/generarcuotasview','generarCuotasMensualesView')->middleware(['auth','admin'])->name('generarcuotasview');
     Route::post('/generarcuotas','generarCuotasMensuales')->middleware(['auth','admin'])->name('generarcuotas');
     Route::get('/cuotas/{id}/pdf', 'generarPDFView')->name('generarpdf');
+    Route::get('/pagofallido','pagoFallido')->middleware(['auth','admin'])->name('pagofallido');
 });
 
 // Resources
@@ -71,7 +72,7 @@ Route::resource('cuotas', CuotasController::class)->middleware(['auth','admin'])
 Route::controller(PaymentController::class)->group(function(){
     Route::get('/paypal/pay/{id}', 'payWithPaypal')->name('paypal.pay');
     Route::get('/paypal/status/{id}','payPalStatus')->name('paypal.status');
-    Route::get('/pagocorrecto','pagoCorrecto')->name('pagofinalizado');
+    Route::get('/pagocorrecto','pagoFinalizado')->name('pagofinalizado');
 });
 
 // Login Google
