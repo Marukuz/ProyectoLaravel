@@ -7,7 +7,16 @@
     <input type="hidden" name="clientes_id" value="{{ $cliente }}">
         <!-- PRIMERA FILA -->
         <div class="row">
-            <div class="col-12">
+            <div class="col-6">
+                <!-- Filtrado de errores -->
+                Fecha de Creacion:
+                <br>
+                <input type="datetime-local" class="form-control" name="fecha_emision" value="{{ $fechaactual }}">
+                @error('fecha_emision')
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+            </div>
+            <div class="col-6">
                 <!-- Filtrado de errores -->
                 Importe:
                 <br>

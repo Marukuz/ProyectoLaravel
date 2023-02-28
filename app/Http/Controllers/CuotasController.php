@@ -87,8 +87,9 @@ class CuotasController extends Controller
     public function create($id)
     {
         //
+        $fechaactual = date('Y-m-d H:i:s');
         $cliente = $id;
-        return view('cuotas/añadircuota',compact('cliente'));
+        return view('cuotas/añadircuota',compact('cliente',"fechaactual"));
     }
 
     /**
@@ -104,6 +105,14 @@ class CuotasController extends Controller
             'concepto'=>'required',
             'importe'=>'required|regex:/^[0-9]+$/',
             'notas'=>'required',
+            'fecha_emision'=> [
+                'nullable',
+                function ($atribute, $value, $fail) {
+                    if (date("Y-m-d\TH", strtotime($value)) != date("Y-m-d\TH")) {
+                        $fail('La fecha de creación no se puede modificar.');
+                    }
+                }
+            ],
         ]);
         $datos['fecha_emision'] = date('Y-m-d H:i:s');
         $datos['pagada'] = 'No';
@@ -148,15 +157,24 @@ class CuotasController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $cuota = cuotas::find($id);
+        $fechar = $cuota['fecha_emision'];
         $datos = $request->validate([
             'concepto'=>'required',
             'importe'=>'required|regex:/^[0-9]+$/',
             'notas'=>'required',
             'pagada'=>'required',
             'fecha_pago'=>'nullable',
+            'fecha_realizacion'=>[
+                'nullable',
+                function ($atribute, $value, $fail) use ($fechar) {
+                    if (date("Y-m-d\TH", strtotime($value)) <= date("Y-m-d\TH", strtotime($fechar))) {
+                        $fail('La fecha de realizacion no puede ser menor a la de creacion.');
+                    }
+                }
+            ],
         ]);
 
-        $cuota = cuotas::find($id);
         $cuota->update($datos);
         return redirect()->route('cuotas.show',$cuota->clientes_id);
     }

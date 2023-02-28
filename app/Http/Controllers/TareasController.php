@@ -31,23 +31,7 @@ class TareasController extends Controller
         
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-        if(Auth::user()->tipo=="Administrador"){
-            $operarios = User::all()->where('tipo','=','Operario');
-            $clientes = clientes::all();
-            $provincias = provincias::all();
-            return view('tareas/añadirtarea',compact("provincias","clientes","operarios"));
-        }else{
-            return redirect()->route('tareas.index');
-        }
-    }
+ 
 
     public function createCliente()
     {
@@ -90,7 +74,24 @@ class TareasController extends Controller
         return redirect()->route('login');
         
     }
-
+   /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+        if(Auth::user()->tipo=="Administrador"){
+            $fechaactual = date('Y-m-d H:i:s');
+            $operarios = User::all()->where('tipo','=','Operario');
+            $clientes = clientes::all();
+            $provincias = provincias::all();
+            return view('tareas/añadirtarea',compact("provincias","clientes","operarios","fechaactual"));
+        }else{
+            return redirect()->route('tareas.index');
+        }
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -100,7 +101,7 @@ class TareasController extends Controller
     public function store(Request $request)
     {
         //
-
+        $fechaactual = date('Y-m-d H:i:s');
         $datos = $request->validate([
             'dni'=>['required','regex:/((^[A-Z]{1}[0-9]{7}[A-Z0-9]{1}$|^[T]{1}[A-Z0-9]{8}$)|^[0-9]{8}[A-Z]{1}$)/'],
             'nombre'=>'required|regex:/^[a-z]+$/i',
@@ -112,11 +113,26 @@ class TareasController extends Controller
             'codigo_postal'=>'required|regex:/^([0-9]{5})$/',
             'provincia'=>'required',
             'users_id'=>'required',
-            'fecha_realizacion'=>'nullable',
+            'fecha_realizacion'=>[
+                'nullable',
+                function ($atribute, $value, $fail) use ($fechaactual) {
+                    if (date("Y-m-d\TH", strtotime($value)) <= date("Y-m-d\TH", strtotime($fechaactual))) {
+                        $fail('La fecha de realizacion no puede ser menor a la de creacion.');
+                    }
+                }
+            ],
             'descripcion'=>'required',
             'anotacion_inicio'=>'nullable',
             'anotacion_final'=>'nullable',
             'clientes_id'=>'required',
+            'fecha_creacion'=> [
+                'required',
+                function ($atribute, $value, $fail) {
+                    if (date("Y-m-d\TH", strtotime($value)) != date("Y-m-d\TH")) {
+                        $fail('La fecha de creación no se puede modificar.');
+                    }
+                }
+            ],
         
         ]);
 
@@ -253,6 +269,10 @@ class TareasController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $tarea = tareas::find($id);
+
+        $fechar=$tarea['fecha_creacion'];
+
         $datos = $request->validate([
             'dni'=>['required','regex:/((^[A-Z]{1}[0-9]{7}[A-Z0-9]{1}$|^[T]{1}[A-Z0-9]{8}$)|^[0-9]{8}[A-Z]{1}$)/'],
             'nombre'=>'required|regex:/^[a-z]+$/i',
@@ -265,14 +285,28 @@ class TareasController extends Controller
             'provincia'=>'required',
             'users_id'=>'required',
             'estado_tarea'=>'required',
-            'fecha_realizacion'=>'nullable',
+            'fecha_realizacion'=>[
+                'nullable',
+                function ($atribute, $value, $fail) use ($fechar) {
+                    if (date("Y-m-d\TH", strtotime($value)) <= date("Y-m-d\TH", strtotime($fechar))) {
+                        $fail('La fecha de realizacion no puede ser menor a la de creacion.');
+                    }
+                }
+            ],
+            'fecha_creacion'=> [
+                'nullable',
+                function ($atribute, $value, $fail) {
+                    if (date("Y-m-d\TH", strtotime($value)) != date("Y-m-d\TH")) {
+                        $fail('La fecha de creación no se puede modificar.');
+                    }
+                }
+            ],
             'descripcion'=>'required',
             'anotacion_inicio'=>'nullable',
             'anotacion_final'=>'nullable',
             'clientes_id'=>'required',
         ]);
 
-        $tarea = tareas::find($id);
         $tarea->update($datos);
         return redirect()->route('tareas.index');
     }

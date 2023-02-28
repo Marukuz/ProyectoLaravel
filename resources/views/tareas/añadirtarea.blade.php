@@ -65,7 +65,7 @@
         <br>
         <!-- TERCERA FILA -->
         <div class="row">
-            <div class="col-4">
+            <div class="col-3">
                 <!-- Filtrado de errores -->
                 Telefono:
                 <br>
@@ -74,7 +74,7 @@
                 <span class="text-danger">{{$message}}</span>
                 @enderror
             </div>
-            <div class="col-4">
+            <div class="col-3">
                 <!-- Filtrado de errores -->
                 Direccion:
                 <br>
@@ -83,7 +83,7 @@
                 <span class="text-danger">{{$message}}</span>
                 @enderror
             </div>
-            <div class="col-4">
+            <div class="col-3">
                 <!-- Filtrado de errores -->
                 Poblacion:
                 <br>
@@ -92,11 +92,7 @@
                 <span class="text-danger">{{$message}}</span>
                 @enderror
             </div>
-        </div>
-        <br>
-        <!-- CUARTA FILA -->
-        <div class="row">
-            <div class="div col-3">
+                    <div class="div col-3">
 
                 <!-- Filtrado de errores -->
                 Codigo Postal:
@@ -107,6 +103,11 @@
                 @enderror
 
             </div>
+        </div>
+        <br>
+        <!-- CUARTA FILA -->
+        <div class="row">
+    
             <div class="div col-3">
                 <!-- Filtrado de errores -->
                 Provincia:
@@ -137,7 +138,16 @@
             </div>
             <div class="div col-3">
                 <!-- Filtrado de errores -->
-                Fecha:
+                Fecha Actual:
+                <br>
+                <input type="datetime-local" class="form-control" name="fecha_creacion" value="{{ $fechaactual }}">
+                @error('fecha_creacion')
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+            </div>
+            <div class="div col-3">
+                <!-- Filtrado de errores -->
+                Fecha Realizacion:
                 <br>
                 <input type="datetime-local" class="form-control" name="fecha_realizacion" value="{{ old('fecha_realizacion') }}">
                 @error('fecha_realizacion')

@@ -42,7 +42,7 @@
         </div>
         <!-- Tercera fila -->
         <div class="row">
-            <div class="col-6">
+            <div class="col-4">
                 <!-- Filtrado de errores -->
                 Pagada:                
                 <br>
@@ -55,12 +55,21 @@
                 <span class="text-danger">{{$message}}</span>
                 @enderror
             </div>
-            <div class="col-6">
+            <div class="col-4">
                 <!-- Filtrado de errores -->
                 Fecha de Pago:
                 <br>
                 <input type="datetime-local" class="form-control" name="fecha_pago" value="{{ old('fecha_pago',$cuota->fecha_pago) }}">
                 @error('fecha_pago')
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+            </div>
+            <div class="col-4">
+                <!-- Filtrado de errores -->
+                Fecha de Creacion:
+                <br>
+                <input type="datetime-local" class="form-control" name="fecha_emision" value="{{ $cuota->fecha_emision }}">
+                @error('fecha_emision')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
             </div>

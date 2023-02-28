@@ -121,8 +121,10 @@
            <div class="row">
                 <div class="col-4">
                     Fecha creacion: <br>
-                    <input type="datetime-local" class="form-control" name="fechac" value="{{$tarea['fecha_creacion'] ?? ''}}" readonly><br>
-
+                    <input type="datetime-local" class="form-control" name="fechac" value="{{$tarea['fecha_creacion']}}"><br>
+                    @error('fecha_creacion')
+                    <span class="text-danger">{{$message}}</span>
+                    @enderror
                 </div>
                 <div class="col-4">
                     Fecha Realizacion: <br>
