@@ -165,10 +165,10 @@ class CuotasController extends Controller
             'notas'=>'required',
             'pagada'=>'required',
             'fecha_pago'=>'nullable',
-            'fecha_realizacion'=>[
+            'fecha_emision'=>[
                 'nullable',
                 function ($atribute, $value, $fail) use ($fechar) {
-                    if (date("Y-m-d\TH", strtotime($value)) <= date("Y-m-d\TH", strtotime($fechar))) {
+                    if (date("Y-m-d\TH", strtotime($value)) != date("Y-m-d\TH", strtotime($fechar))) {
                         $fail('La fecha de realizacion no puede ser menor a la de creacion.');
                     }
                 }
